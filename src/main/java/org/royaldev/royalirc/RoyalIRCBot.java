@@ -17,9 +17,11 @@ public class RoyalIRCBot {
         bot.setVersion("RoyalIRC " + RoyalIRC.version);
         final String hostname = cs.getString("hostname");
         final int port = cs.getInt("port", 6667);
+        final String password = cs.getString("server_password", "");
         plugin.getLogger().info("Attempting to connect to " + hostname + ":" + port + "...");
         try {
-            bot.connect(cs.getString("hostname"), cs.getInt("port"));
+            if (password.isEmpty()) bot.connect(hostname, port);
+            else bot.connect(hostname, port, password);
             plugin.getLogger().info("Connected!");
         } catch (Exception e) {
             plugin.getLogger().warning("Could not connect to " + hostname + ":" + port + "!");

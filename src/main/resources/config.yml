@@ -6,6 +6,8 @@ servers:
     hostname: irc.esper.net
     # Port to connect to
     port: 6667
+    # Password to use to connect to the server
+    server_password: ""
     # Service to auth with - only NickServ support
     auth: NickServ
     # Password to use with auth service
