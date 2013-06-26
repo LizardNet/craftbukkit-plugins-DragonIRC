@@ -38,7 +38,7 @@ public class RUtils {
 
     public static boolean isFantasyCommand(String message) {
         final String firstWord = message.split(" ")[0].toLowerCase();
-        return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(firstWord);
+        return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(firstWord.substring(1));
     }
 
     public static String getFantasyCommand(String message) {

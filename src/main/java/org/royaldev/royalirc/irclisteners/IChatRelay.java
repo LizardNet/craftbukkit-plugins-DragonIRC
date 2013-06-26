@@ -8,6 +8,7 @@ import org.pircbotx.hooks.events.MessageEvent;
 import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.RUtils;
 import org.royaldev.royalirc.RoyalIRC;
 
 public class IChatRelay extends ListenerAdapter {
@@ -22,7 +23,7 @@ public class IChatRelay extends ListenerAdapter {
     public void onMessage(MessageEvent e) {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
-        if (e.getMessage().startsWith(String.valueOf(Config.fantasyChar))) return;
+        if (RUtils.isFantasyCommand(e.getMessage())) return;
         String message = Config.itiMessage;
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getUser().getNick());
@@ -35,7 +36,6 @@ public class IChatRelay extends ListenerAdapter {
     public void onAction(ActionEvent e) {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
-        if (e.getMessage().startsWith(String.valueOf(Config.fantasyChar))) return;
         String message = Config.itiAction;
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getUser().getNick());
