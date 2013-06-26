@@ -4,9 +4,46 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.pircbotx.Channel;
 import org.pircbotx.Colors;
+import org.pircbotx.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RUtils {
+
+    private static final List<String> fantasyCommands = new ArrayList<String>() {
+        {
+            add("players");
+            add("kick");
+        }
+    };
+
+    public static boolean atLeastHalfOp(User u, Channel c) {
+        return c.isHalfOp(u) || c.isOp(u) || c.isOwner(u) || c.isSuperOp(u) || u.isIrcop();
+    }
+
+    public static boolean isMod(String name) {
+        return Config.mods.contains(name);
+    }
+
+    public static boolean isAdmin(String name) {
+        return Config.admins.contains(name);
+    }
+
+    public static boolean atLeastMod(String name) {
+        return isMod(name) || isAdmin(name);
+    }
+
+    public static boolean isFantasyCommand(String message) {
+        final String firstWord = message.split(" ")[0].toLowerCase();
+        return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(firstWord);
+    }
+
+    public static String getFantasyCommand(String message) {
+        return message.split(" ")[0].substring(1);
+    }
 
     public static void dispNoPerms(CommandSender cs) {
         cs.sendMessage(ChatColor.RED + "You don't have permission for that!");

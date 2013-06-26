@@ -5,14 +5,15 @@ import org.apache.commons.lang.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
-import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.RUtils;
 
 public class IPCmdPrivmsg extends ListenerAdapter {
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent e) {
         if (!e.getMessage().trim().split(" ")[0].equalsIgnoreCase("privmsg")) return;
-        if (!Config.admins.contains(e.getUser().getNick())) {
+        final User u = e.getUser();
+        if (!RUtils.isAdmin(u.getNick())) {
             e.respond("You are not allowed to do this.");
             return;
         }
@@ -24,8 +25,8 @@ public class IPCmdPrivmsg extends ListenerAdapter {
         }
         String sendTo = args[0];
         String message = StringUtils.join(args, " ", 1, args.length);
-        final User u = e.getBot().getUser(sendTo);
-        u.sendMessage(message);
-        e.respond("Sent message \"" + message + "\" to " + u.getNick() + ".");
+        final User t = e.getBot().getUser(sendTo);
+        t.sendMessage(message);
+        e.respond("Sent message \"" + message + "\" to " + t.getNick() + ".");
     }
 }

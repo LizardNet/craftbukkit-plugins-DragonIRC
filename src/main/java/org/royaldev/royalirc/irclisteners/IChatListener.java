@@ -10,6 +10,7 @@ import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.RUtils;
 import org.royaldev.royalirc.RoyalIRC;
 
 public class IChatListener extends ListenerAdapter {
@@ -36,7 +37,7 @@ public class IChatListener extends ListenerAdapter {
     public void onMessage(MessageEvent e) {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         if (e.getMessage().trim().startsWith(String.valueOf(Config.commentChar))) return;
-        if (e.getMessage().startsWith(String.valueOf(Config.fantasyChar))) return;
+        if (RUtils.isFantasyCommand(e.getMessage())) return;
         String message = Config.itbPrivmsg;
         message = replaceVars(e, message);
         message = message.replace("{channel}", e.getChannel().getName());

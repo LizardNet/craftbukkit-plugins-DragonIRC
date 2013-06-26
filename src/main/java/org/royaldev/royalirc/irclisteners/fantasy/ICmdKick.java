@@ -3,6 +3,7 @@ package org.royaldev.royalirc.irclisteners.fantasy;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
+import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.royaldev.royalirc.Config;
@@ -19,19 +20,12 @@ public class ICmdKick extends ListenerAdapter {
 
     @Override
     public void onMessage(MessageEvent e) {
-        if (!e.getMessage().startsWith(String.valueOf(Config.fantasyChar))) return;
-        String command = e.getMessage().trim().split(" ")[0].substring(1);
+        if (!RUtils.isFantasyCommand(e.getMessage())) return;
+        final String command = RUtils.getFantasyCommand(e.getMessage());
         if (!command.equalsIgnoreCase("kick")) return;
-        if (!Config.mods.contains(e.getUser().getNick()) && !Config.admins.contains(e.getUser().getNick())) {
-            e.respond("You do not have permission for this.");
-            return;
-        }
-        if (Config.mods.contains(e.getUser().getNick()) && !e.getChannel().isHalfOp(e.getUser())) {
-            e.respond("You do not have permission for this.");
-            return;
-        }
-        if (Config.admins.contains(e.getUser().getNick()) && !e.getChannel().isOp(e.getUser())) {
-            e.respond("You do not have permission for this.");
+        final User u = e.getUser();
+        if (!RUtils.atLeastMod(u.getNick()) || !RUtils.atLeastHalfOp(u, e.getChannel())) {
+            e.respond("You do not have permission for that.");
             return;
         }
         String[] args = e.getMessage().split(" ");
@@ -41,7 +35,7 @@ public class ICmdKick extends ListenerAdapter {
             return;
         }
         final String toKick = args[0];
-        final String reason = (args.length > 1) ? StringUtils.join(args, " ", 1, args.length) : "Kicked by " + e.getUser().getNick();
+        final String reason = (args.length > 1) ? StringUtils.join(args, " ", 1, args.length) : "Kicked by " + u.getNick();
         final Player p = plugin.getServer().getPlayer(toKick);
         if (p == null) {
             e.respond("No such player.");

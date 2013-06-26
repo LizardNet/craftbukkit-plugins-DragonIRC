@@ -2,9 +2,10 @@ package org.royaldev.royalirc.irclisteners.privcommands;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
-import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.RUtils;
 
 public class IPCmdRaw extends ListenerAdapter {
 
@@ -12,7 +13,8 @@ public class IPCmdRaw extends ListenerAdapter {
     public void onPrivateMessage(PrivateMessageEvent e) {
         String command = e.getMessage().trim().split(" ")[0];
         if (!command.equalsIgnoreCase("raw")) return;
-        if (!Config.admins.contains(e.getUser().getNick())) {
+        final User u = e.getUser();
+        if (!RUtils.isAdmin(u.getNick())) {
             e.respond("You are not allowed to do this.");
             return;
         }
