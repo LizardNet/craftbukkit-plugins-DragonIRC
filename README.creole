@@ -2,7 +2,7 @@
 
 RoyalIRC is an easy-to-use plugin for server administrators looking to link their servers to an IRC server.
 
-Features:
+== Features
 
  * Multiple connections
  * Supports linking those connections to each other
@@ -18,7 +18,9 @@ Features:
  * Able to parse color codes from Minecraft before sending to IRC
  * Supports /say and /me (with configurable aliases)
 
-Currently, no documentation is available, but it will be created soon.
+== Documentation
+
+The GitHub wiki has all the documentation for RoyalIRC.
 
 == Contact
 
