@@ -9,6 +9,7 @@ softdepend: [VanishNoPacket]
 commands:
   royalirc:
     description: Reloads the plugin.
+    aliases: [rirc]
     usage: /<command>
 
 permissions:
