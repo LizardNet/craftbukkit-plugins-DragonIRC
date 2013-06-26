@@ -1,0 +1,26 @@
+= RoyalIRC
+
+RoyalIRC is an easy-to-use plugin for server administrators looking to link their servers to an IRC server.
+
+Features:
+
+ * Multiple connections
+ * Supports linking those connections to each other
+ * Supports colors completely (IRC -> MC & MC -> IRC)
+ * Completely configurable messages and bot info
+ * Fantasy commands and privmsg commands
+ * Automatic NickServ authentication before channel joins
+ * Easy joining to channels with keys
+ * Configurable message delays to prevent spam kicks/bans
+ * Runs on PircBotX, which is shaded into the jar, so no extra downloads
+ * Checks for vanished players with VanishNoPacket
+ * Adds a character to use before messages to skip sending them to MC
+ * Able to parse color codes from Minecraft before sending to IRC
+ * Supports /say and /me (with configurable aliases)
+
+Currently, no documentation is available, but it will be created soon.
+
+== Contact
+
+IRC is the easiest way to get ahold of me. I'm jkcclemens on both my own IRC server (irc.royaldev.org #bukkit) and on
+EsperNet (irc.esper.net #royaldev).
