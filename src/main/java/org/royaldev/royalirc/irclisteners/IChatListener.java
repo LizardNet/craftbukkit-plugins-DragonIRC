@@ -69,8 +69,9 @@ public class IChatListener extends ListenerAdapter {
     public void onPart(PartEvent e) {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itbPart;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{name}", e.getUser().getNick());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         message = message.replace("{channel}", e.getChannel().getName());
         message = replaceVarsGeneric(e, message);
         plugin.sendToMinecraft(message);
@@ -79,8 +80,9 @@ public class IChatListener extends ListenerAdapter {
     @Override
     public void onKick(KickEvent e) {
         String message = Config.itbKick;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{name}", e.getRecipient().getNick());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         message = message.replace("{channel}", e.getChannel().getName());
         message = message.replace("{kicker}", e.getSource().getNick());
         message = replaceVarsGeneric(e, message);
@@ -89,10 +91,11 @@ public class IChatListener extends ListenerAdapter {
 
     @Override
     public void onQuit(QuitEvent e) {
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itbQuit;
         message = message.replace("{name}", e.getUser().getNick());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         message = replaceVarsGeneric(e, message);
         plugin.sendToMinecraft(message);
     }

@@ -44,6 +44,8 @@ public class Config {
         itiQuit = c.getString("messages.iti.quit");
         itiKick = c.getString("messages.iti.kick");
 
+        defaultReason = c.getString("messages.default_reason");
+
         actionAliases = c.getStringList("commands.bukkit.action");
         admins = c.getStringList("settings.admins");
         sayAliases = c.getStringList("commands.bukkit.say");
@@ -77,6 +79,8 @@ public class Config {
     public static String itiPart;
     public static String itiQuit;
     public static String itiKick;
+
+    public static String defaultReason;
 
     public static List<String> actionAliases;
     public static List<String> admins;

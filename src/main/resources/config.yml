@@ -62,6 +62,8 @@ settings:
 
 # Message formats
 messages:
+  # Reason to give if no reason is given for things like kicks and parts
+  default_reason: "[No reason]"
   # IRC -> IRC
   iti:
     message: "[{server}/{channel}] <{name}> {message}"

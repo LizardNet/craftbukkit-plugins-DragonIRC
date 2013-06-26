@@ -60,10 +60,11 @@ public class IChatRelay extends ListenerAdapter {
         if (!Config.linkChannels) return;
         if (e.getRecipient().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiKick;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getRecipient().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         message = message.replace("{kicker}", e.getSource().getNick());
         plugin.bh.sendMessageToOtherChannels(message, e.getChannel());
     }
@@ -73,10 +74,11 @@ public class IChatRelay extends ListenerAdapter {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiPart;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         plugin.bh.sendMessageToOtherChannels(message, e.getChannel());
     }
 
@@ -85,9 +87,10 @@ public class IChatRelay extends ListenerAdapter {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiQuit;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getUser().getNick());
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         plugin.bh.sendMessageToOtherServers(message, e.getBot().getServer());
     }
 }

@@ -73,8 +73,9 @@ public class BChatListener implements Listener {
     public void onKick(PlayerKickEvent e) {
         if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getPlayer())) return;
         String message = Config.btiKick;
+        final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = replaceVars(e, message);
-        message = message.replace("{message}", e.getReason());
+        message = message.replace("{message}", reason);
         plugin.bh.sendMessage(message);
     }
 
