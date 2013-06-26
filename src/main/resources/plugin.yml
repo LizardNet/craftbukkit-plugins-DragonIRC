@@ -1,0 +1,17 @@
+name: RoyalIRC
+version: ${pluginversion}
+main: org.royaldev.royalirc.RoyalIRC
+author: jkcclemens
+description: Minecraft <-> IRC link
+website: http://royaldev.org/
+softdepend: [VanishNoPacket]
+
+commands:
+  royalirc:
+    description: Reloads the plugin.
+    usage: /<command>
+
+permissions:
+  royalirc.royalirc:
+    description: Allows /royalirc.
+    default: op

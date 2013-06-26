@@ -1,0 +1,98 @@
+# Uncomment and restart server. You can specify multiple IRC servers like below
+servers:
+  # Bot name
+  EsperNet:
+    # Host to connect to
+    hostname: irc.esper.net
+    # Port to connect to
+    port: 6667
+    # Service to auth with - only NickServ support
+    auth: NickServ
+    # Password to use with auth service
+    auth_password: abc123
+    # Nick to use on server - if nick is taken, will add numbers to the end until it isn't
+    nick: RoyalIRC
+    # Login to use
+    login: RoyalIRC
+    # What to return for CTCP finger
+    finger: RoyalDev IRC Link
+    # Time (in ms) to delay messages to prevent spam kicks/bans
+    message_delay: 250
+    # Channels to connect to
+    channels:
+    - "#rircbots"
+    # Specify a key after a space
+    - "#rircbots keyhere"
+#  Quake:
+#    hostname: irc.quake.net
+#    port: 6667
+#    auth: NickServ
+#    password: whoknows
+#    nick: RoyalIRC
+#    ident: RoyalCraft IRC Link
+#    login: RoyalIRC
+#    finger: RoyalCraft IRC Link
+#    message_delay: 500
+#    channels:
+#    - "#rircbots"
+
+# General settings
+settings:
+  # Link multiple servers and channels together?
+  link_channels: true
+  # Color settings
+  colors:
+    # Allow colors to be sent between IRC and MC?
+    allow_colors: true
+    # Parse colors from MC (turn & into section signs?)
+    parse_colors: true
+  # Character to use before a message to stop it from being sent to MC
+  comment_character: "#"
+  # Character to use before IRC commands
+  fantasy_character: "."
+  # Admins that can use privmsg commands - only use temporarily, as they are not verified, so someone could steal your
+  # nick and have access.
+  admins:
+  - jkcclemens
+  # Mods that can use in-channel commands - must have chan half-op
+  mods:
+  - WizardCM
+
+# Message formats
+messages:
+  # IRC -> IRC
+  iti:
+    message: "[{server}/{channel}] <{name}> {message}"
+    action: "[{server}/{channel}] * {name} {message}"
+    join: "[{server}/{channel}] {name} joined the room."
+    part: "[{server}/{channel}] {name} parted the room: {message}."
+    quit: "[{server}] {name} quit the server: {message}."
+    kick: "[{server}/{channel}] {name} was kicked from the room by {kicker}: {message}."
+  # IRC -> Bukkit
+  itb:
+    privmsg: "&9[&aIRC&9] ({channel}) {name}&r: {message}"
+    action: "&9[&aIRC&9] ({channel})&r * {name} {message}"
+    join: "&9[&aIRC&9] ({channel}) {name} joined the channel."
+    part: "&9[&aIRC&9] ({channel}) {name} parted the channel: {message}."
+    quit: "&9[&aIRC&9] ({server}) {name} quit the server: {message}."
+    kick: "&9[&aIRC&9] ({channel}) {name} was kicked by {kicker}: {message}."
+  # Bukkit -> IRC
+  bti:
+    message: "<{name}> {message}"
+    action: " * {name} {message}"
+    login: "[{name} connected.]"
+    quit: "[{name} disconnected.]"
+    kick: "[{name} was kicked: {message}.]"
+    say: "[Server] {message}"
+
+# Command aliases for detection of /say and /me - make sure to leave a trailing space after all commands
+commands:
+  bukkit:
+    # Commands to associate with /me in IRC
+    action:
+    - "/action "
+    - "/me "
+    - "/emote "
+    # Commands to associate with /say
+    say:
+    - "/say "
