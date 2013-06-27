@@ -10,6 +10,7 @@ import org.royaldev.royalirc.irclisteners.IChatListener;
 import org.royaldev.royalirc.irclisteners.IChatRelay;
 import org.royaldev.royalirc.irclisteners.fantasy.ICmdKick;
 import org.royaldev.royalirc.irclisteners.fantasy.ICmdPlayers;
+import org.royaldev.royalirc.irclisteners.privcommands.IPCmdMessage;
 import org.royaldev.royalirc.irclisteners.privcommands.IPCmdPrivmsg;
 import org.royaldev.royalirc.irclisteners.privcommands.IPCmdRaw;
 
@@ -39,6 +40,7 @@ public class BotHandler {
             lm.addListener(new IChatRelay(plugin));
             lm.addListener(new ICmdPlayers(plugin));
             lm.addListener(new ICmdKick(plugin));
+            lm.addListener(new IPCmdMessage(plugin));
             lm.addListener(new IPCmdPrivmsg());
             lm.addListener(new IPCmdRaw());
         }
@@ -101,6 +103,10 @@ public class BotHandler {
                 bot.getBackend().quitServer("RoyalIRC disabled.");
             }
         }
+    }
+
+    public List<RoyalIRCBot> getBots() {
+        return bots;
     }
 
 }

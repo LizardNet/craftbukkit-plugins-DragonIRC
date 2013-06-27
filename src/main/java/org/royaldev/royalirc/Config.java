@@ -23,7 +23,7 @@ public class Config {
         plugin.reloadConfig();
         FileConfiguration c = plugin.getConfig();
 
-        itbPrivmsg = RUtils.colorize(c.getString("messages.itb.privmsg"));
+        itbMessage = RUtils.colorize(c.getString("messages.itb.message"));
         itbAction = RUtils.colorize(c.getString("messages.itb.action"));
         itbJoin = RUtils.colorize(c.getString("messages.itb.join"));
         itbPart = RUtils.colorize(c.getString("messages.itb.part"));
@@ -44,6 +44,11 @@ public class Config {
         itiQuit = c.getString("messages.iti.quit");
         itiKick = c.getString("messages.iti.kick");
 
+        btuMessage = c.getString("messages.btu.message");
+        btuConfirm = RUtils.colorize(c.getString("messages.btu.confirm"));
+
+        ituMessage = RUtils.colorize(c.getString("messages.itu.message"));
+
         defaultReason = c.getString("messages.default_reason");
 
         actionAliases = c.getStringList("commands.bukkit.action");
@@ -60,7 +65,7 @@ public class Config {
         defaultConfig = c.getBoolean("default_config");
     }
 
-    public static String itbPrivmsg;
+    public static String itbMessage;
     public static String itbAction;
     public static String itbJoin;
     public static String itbPart;
@@ -80,6 +85,11 @@ public class Config {
     public static String itiPart;
     public static String itiQuit;
     public static String itiKick;
+
+    public static String btuMessage;
+    public static String btuConfirm;
+
+    public static String ituMessage;
 
     public static String defaultReason;
 

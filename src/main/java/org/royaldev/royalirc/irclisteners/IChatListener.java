@@ -38,7 +38,7 @@ public class IChatListener extends ListenerAdapter {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         if (e.getMessage().trim().startsWith(String.valueOf(Config.commentChar))) return;
         if (RUtils.isFantasyCommand(e.getMessage())) return;
-        String message = Config.itbPrivmsg;
+        String message = Config.itbMessage;
         message = replaceVars(e, message);
         message = message.replace("{channel}", e.getChannel().getName());
         message = replaceVarsGeneric(e, message);

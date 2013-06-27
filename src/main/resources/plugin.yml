@@ -11,8 +11,21 @@ commands:
     description: Reloads the plugin.
     aliases: [rirc]
     usage: /<command>
+  ircmessage:
+    description: Sends a message to a user on IRC.
+    aliases: [im]
+    usage: /<command> [server] [user] [message]
 
 permissions:
+  royalirc.*:
+    description: Grants all permissions.
+    default: false
+    children:
+      royalirc.royalirc: true
+      royalirc.ircmessage: true
   royalirc.royalirc:
     description: Allows /royalirc.
+    default: op
+  royalirc.ircmessage:
+    description: Allows /ircmessage.
     default: op

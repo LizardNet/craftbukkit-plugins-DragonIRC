@@ -77,11 +77,11 @@ messages:
     kick: "[{server}/{channel}] {name} was kicked from the room by {kicker}: {message}."
   # IRC -> Bukkit
   itb:
-    privmsg: "&9[&aIRC&9] ({channel}) {name}&r: {message}"
-    action: "&9[&aIRC&9] ({channel})&r * {name} {message}"
-    join: "&9[&aIRC&9] ({channel}) {name} joined the channel."
-    part: "&9[&aIRC&9] ({channel}) {name} parted the channel: {message}."
-    quit: "&9[&aIRC&9] ({server}) {name} quit the server: {message}."
+    message: "&9[&aIRC&9]&r ({channel}) {name}&r: {message}"
+    action: "&9[&aIRC&9]&r ({channel}) * {name} {message}"
+    join: "&9[&aIRC&9]&r ({channel}) {name} joined the channel."
+    part: "&9[&aIRC&9]&r ({channel}) {name} parted the channel: {message}."
+    quit: "&9[&aIRC&9]&r ({server}) {name} quit the server: {message}."
     kick: "&9[&aIRC&9] ({channel}) {name} was kicked by {kicker}: {message}."
   # Bukkit -> IRC
   bti:
@@ -91,6 +91,16 @@ messages:
     quit: "[{name} disconnected.]"
     kick: "[{name} was kicked: {message}.]"
     say: "[Server] {message}"
+  # Bukkit User -> IRC User
+  btu:
+    # Message to appear to IRC user
+    message: "{name} whispers: {message}"
+    # Message to appear to Bukkit User
+    confirm: "&9[&7{name} &9-> &7{server}/{recipient}&9]&7 {message}"
+  # IRC User -> Bukkit User
+  itu:
+    # Message to appear to Bukkit User
+    message: "&9[&aIRC&9]&r [{server}] {name} whispers: {message}"
 
 # Command aliases for detection of /say and /me - make sure to leave a trailing space after all commands
 commands:
