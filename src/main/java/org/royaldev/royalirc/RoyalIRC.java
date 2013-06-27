@@ -2,6 +2,7 @@ package org.royaldev.royalirc;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.pircbotx.Colors;
 import org.royaldev.royalirc.bukkitlistener.BChatListener;
 import org.royaldev.royalirc.bukkitlistener.BServerListener;
 import org.royaldev.royalirc.commands.CmdRoyalIRC;
@@ -20,6 +21,7 @@ public class RoyalIRC extends JavaPlugin {
 
     public void sendToMinecraft(String s) {
         if (Config.allowColors) s = RUtils.ircColorsToMinecraftColors(s);
+        else s = Colors.removeFormattingAndColors(s);
         getServer().broadcastMessage(s);
     }
 

@@ -29,6 +29,7 @@ public class BotHandler {
     private String convertMessages(String s) {
         if (Config.parseColors) s = ChatColor.translateAlternateColorCodes('&', s);
         if (Config.allowColors) s = RUtils.minecraftColorstoIRCColors(s);
+        else s = ChatColor.stripColor(s);
         return s;
     }
 
