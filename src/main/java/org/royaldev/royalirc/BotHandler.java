@@ -4,13 +4,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
+import org.pircbotx.User;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
 import org.royaldev.royalirc.irclisteners.IChatListener;
 import org.royaldev.royalirc.irclisteners.IChatRelay;
+import org.royaldev.royalirc.irclisteners.IKickListener;
 import org.royaldev.royalirc.irclisteners.fantasy.ICmdKick;
 import org.royaldev.royalirc.irclisteners.fantasy.ICmdPlayers;
+import org.royaldev.royalirc.irclisteners.privcommands.IPCmdJoin;
 import org.royaldev.royalirc.irclisteners.privcommands.IPCmdMessage;
+import org.royaldev.royalirc.irclisteners.privcommands.IPCmdPart;
 import org.royaldev.royalirc.irclisteners.privcommands.IPCmdPrivmsg;
 import org.royaldev.royalirc.irclisteners.privcommands.IPCmdRaw;
 
@@ -38,11 +42,14 @@ public class BotHandler {
         if (lm.getListeners().size() < 1) {
             lm.addListener(new IChatListener(plugin));
             lm.addListener(new IChatRelay(plugin));
+            lm.addListener(new IKickListener());
             lm.addListener(new ICmdPlayers(plugin));
             lm.addListener(new ICmdKick(plugin));
             lm.addListener(new IPCmdMessage(plugin));
             lm.addListener(new IPCmdPrivmsg());
             lm.addListener(new IPCmdRaw());
+            lm.addListener(new IPCmdJoin());
+            lm.addListener(new IPCmdPart());
         }
         ConfigurationSection servers = plugin.getConfig().getConfigurationSection("servers");
         for (String server : servers.getKeys(false)) {
@@ -78,7 +85,7 @@ public class BotHandler {
         synchronized (bots) {
             for (RoyalIRCBot bot : bots) {
                 for (Channel c : bot.getBackend().getChannels()) {
-                    if (c.equals(dontSendTo)) continue;
+                    if (RUtils.sameChannels(dontSendTo, c)) continue;
                     c.sendMessage(message);
                 }
             }
@@ -107,6 +114,24 @@ public class BotHandler {
 
     public List<RoyalIRCBot> getBots() {
         return bots;
+    }
+
+    public RoyalIRCBot getBotByServer(String server) {
+        for (RoyalIRCBot rib : bots) {
+            if (!rib.getBackend().getServer().equalsIgnoreCase(server)) continue;
+            return rib;
+        }
+        return null;
+    }
+
+    public boolean userInChannels(User u) {
+        for (Channel uC : u.getChannels()) {
+            for (Channel bC : u.getBot().getChannels()) {
+                if (!uC.equals(bC)) continue;
+                return true;
+            }
+        }
+        return false;
     }
 
 }

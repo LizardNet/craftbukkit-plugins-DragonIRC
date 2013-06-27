@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.pircbotx.Colors;
 import org.royaldev.royalirc.bukkitlistener.BChatListener;
 import org.royaldev.royalirc.bukkitlistener.BServerListener;
+import org.royaldev.royalirc.commands.CmdIRCKick;
 import org.royaldev.royalirc.commands.CmdIRCMessage;
 import org.royaldev.royalirc.commands.CmdRoyalIRC;
 
@@ -51,6 +52,7 @@ public class RoyalIRC extends JavaPlugin {
 
         getCommand("royalirc").setExecutor(new CmdRoyalIRC(this));
         getCommand("ircmessage").setExecutor(new CmdIRCMessage(this));
+        getCommand("irckick").setExecutor(new CmdIRCKick(this));
 
         //-- Hidendra's Metrics --//
 

@@ -9,6 +9,7 @@ import org.pircbotx.Colors;
 import org.pircbotx.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RUtils {
@@ -24,6 +25,10 @@ public class RUtils {
         return c.isHalfOp(u) || c.isOp(u) || c.isOwner(u) || c.isSuperOp(u) || u.isIrcop();
     }
 
+    public static boolean atLeastOp(User u, Channel c) {
+        return c.isOp(u) || c.isOwner(u) || c.isSuperOp(u) || u.isIrcop();
+    }
+
     public static boolean isMod(String name) {
         return Config.mods.contains(name);
     }
@@ -37,12 +42,16 @@ public class RUtils {
     }
 
     public static boolean isFantasyCommand(String message) {
-        final String firstWord = message.split(" ")[0].toLowerCase();
+        final String firstWord = getFirstWord(message);
         return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(firstWord.substring(1));
     }
 
     public static String getFantasyCommand(String message) {
-        return message.split(" ")[0].substring(1);
+        return message.trim().split(" ")[0].substring(1);
+    }
+
+    public static String getFirstWord(String message) {
+        return message.trim().split(" ")[0];
     }
 
     public static void dispNoPerms(CommandSender cs) {
@@ -61,6 +70,18 @@ public class RUtils {
                 p.kickPlayer(reason);
             }
         });
+    }
+
+    public static boolean sameChannels(Channel a, Channel b) {
+        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServer().equalsIgnoreCase(b.getBot().getServer());
+    }
+
+    public static boolean containsChannel(Collection<Channel> cs, Channel lookFor) {
+        for (Channel c : cs) {
+            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServer().equalsIgnoreCase(lookFor.getBot().getServer())) continue;
+            return true;
+        }
+        return false;
     }
 
     public static String ircColorsToMinecraftColors(String s) {

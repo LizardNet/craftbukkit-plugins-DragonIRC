@@ -63,6 +63,9 @@ public class Config {
         allowColors = c.getBoolean("settings.colors.allow_colors");
         parseColors = c.getBoolean("settings.colors.parse_colors");
         defaultConfig = c.getBoolean("default_config");
+        rejoinOnKick = c.getBoolean("settings.on_kick.rejoin");
+
+        rejoinWaitTime = c.getInt("settings.on_kick.time");
     }
 
     public static String itbMessage;
@@ -105,6 +108,9 @@ public class Config {
     public static boolean allowColors;
     public static boolean parseColors;
     public static boolean defaultConfig;
+    public static boolean rejoinOnKick;
+
+    public static int rejoinWaitTime;
 
 }
 

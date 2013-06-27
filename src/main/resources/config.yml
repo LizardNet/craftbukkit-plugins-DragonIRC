@@ -45,6 +45,12 @@ servers:
 settings:
   # Link multiple servers and channels together?
   link_channels: true
+  # What to do when kicked
+  on_kick:
+    # Rejoin when kicked?
+    rejoin: false
+    # How long (in seconds) should we wait to rejoin?
+    time: 5
   # Color settings
   colors:
     # Allow colors to be sent between IRC and MC?

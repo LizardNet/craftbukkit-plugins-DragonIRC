@@ -1,31 +1,34 @@
 package org.royaldev.royalirc.irclisteners.privcommands;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 import org.royaldev.royalirc.RUtils;
 
-public class IPCmdRaw extends ListenerAdapter {
+public class IPCmdJoin extends ListenerAdapter {
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent e) {
         final String command = RUtils.getFirstWord(e.getMessage());
-        if (!command.equalsIgnoreCase("raw")) return;
+        if (!command.equalsIgnoreCase("join")) return;
         final User u = e.getUser();
         if (!RUtils.isAdmin(u.getNick())) {
             e.respond("You are not allowed to do this.");
             return;
         }
-        String[] args = e.getMessage().trim().split(" ");
+        String[] args = e.getMessage().split(" ");
         args = (String[]) ArrayUtils.subarray(args, 1, args.length);
         if (args.length < 1) {
-            e.respond("Usage: raw [command]");
+            e.respond("Usage: join [channel]");
             return;
         }
-        String rawCommand = StringUtils.join(args, " ");
-        e.getBot().sendRawLine(rawCommand);
-        e.respond("Attempted to send raw IRC line: " + rawCommand);
+        final String channel = args[0];
+        if (!channel.startsWith("#")) {
+            e.respond("Channel must start with \"#\" to be valid!");
+            return;
+        }
+        e.getBot().joinChannel(channel);
+        e.respond("Attempted to join channel " + channel + ".");
     }
 }

@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.royaldev.royalirc.Config;
 import org.royaldev.royalirc.RUtils;
@@ -34,25 +33,13 @@ public class CmdIRCMessage implements CommandExecutor {
             String server = args[0];
             String user = args[1];
             String message = StringUtils.join(args, " ", 2, args.length);
-            RoyalIRCBot bot = null;
-            for (RoyalIRCBot rib : plugin.bh.getBots()) {
-                if (!rib.getBackend().getServer().equalsIgnoreCase(server)) continue;
-                bot = rib;
-            }
+            RoyalIRCBot bot = plugin.bh.getBotByServer(server);
             if (bot == null) {
                 cs.sendMessage(ChatColor.RED + "No such server!");
                 return true;
             }
             final User u = bot.getBackend().getUser(user);
-            boolean inChannel = false;
-            for (Channel uC : u.getChannels()) {
-                for (Channel bC : bot.getBackend().getChannels()) {
-                    if (!uC.equals(bC)) continue;
-                    inChannel = true;
-                    break;
-                }
-            }
-            if (!inChannel) {
+            if (!plugin.bh.userInChannels(u)) {
                 cs.sendMessage(ChatColor.RED + "That user is not in the channel!");
                 return true;
             }

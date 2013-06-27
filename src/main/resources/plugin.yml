@@ -15,6 +15,10 @@ commands:
     description: Sends a message to a user on IRC.
     aliases: [im]
     usage: /<command> [server] [user] [message]
+  irckick:
+    description: Kicks a user from a channel on IRC.
+    aliases: [ik]
+    usage: /<command> [server] [channel] [user] (reason)
 
 permissions:
   royalirc.*:
@@ -28,4 +32,7 @@ permissions:
     default: op
   royalirc.ircmessage:
     description: Allows /ircmessage.
+    default: op
+  royalirc.irckick:
+    description: Allows /irckick.
     default: op
