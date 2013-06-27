@@ -35,6 +35,11 @@ public class RoyalIRC extends JavaPlugin {
     public void onEnable() {
         instance = this;
         c = new Config(this);
+        if (Config.defaultConfig) {
+            getLogger().warning("RoyalIRC is disabled until the config is edited.");
+            setEnabled(false);
+            return;
+        }
         version = getDescription().getVersion();
         bh = new BotHandler(this);
         bh.createBots();

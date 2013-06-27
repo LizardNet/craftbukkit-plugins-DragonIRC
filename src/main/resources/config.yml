@@ -1,3 +1,6 @@
+# Is this the default config? Plugin will not run until this is set to false.
+default_config: true
+
 # Uncomment and restart server. You can specify multiple IRC servers like below
 servers:
   # Bot name

@@ -57,6 +57,7 @@ public class Config {
         linkChannels = c.getBoolean("settings.link_channels");
         allowColors = c.getBoolean("settings.colors.allow_colors");
         parseColors = c.getBoolean("settings.colors.parse_colors");
+        defaultConfig = c.getBoolean("default_config");
     }
 
     public static String itbPrivmsg;
@@ -93,6 +94,7 @@ public class Config {
     public static boolean linkChannels;
     public static boolean allowColors;
     public static boolean parseColors;
+    public static boolean defaultConfig;
 
 }
 
