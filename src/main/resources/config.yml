@@ -88,7 +88,8 @@ messages:
     join: "&9[&aIRC&9]&r ({channel}) {name} joined the channel."
     part: "&9[&aIRC&9]&r ({channel}) {name} parted the channel: {message}."
     quit: "&9[&aIRC&9]&r ({server}) {name} quit the server: {message}."
-    kick: "&9[&aIRC&9] ({channel}) {name} was kicked by {kicker}: {message}."
+    kick: "&9[&aIRC&9]&r ({channel}) {name} was kicked by {kicker}: {message}."
+    nick: "&9[&aIRC&9]&r ({server}) {name} changed his nick to {newname}"
   # Bukkit -> IRC
   bti:
     message: "<{name}> {message}"

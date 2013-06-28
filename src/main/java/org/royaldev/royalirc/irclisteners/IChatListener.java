@@ -6,6 +6,7 @@ import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.KickEvent;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.NickChangeEvent;
 import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
@@ -100,4 +101,13 @@ public class IChatListener extends ListenerAdapter {
         plugin.sendToMinecraft(message);
     }
 
+    @Override
+    public void onNickChange(NickChangeEvent e) {
+        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        String message = Config.itbNick;
+        message = message.replace("{name}", e.getOldNick());
+        message = message.replace("{newname}", e.getNewNick());
+        message = replaceVarsGeneric(e, message);
+        plugin.sendToMinecraft(message);
+    }
 }

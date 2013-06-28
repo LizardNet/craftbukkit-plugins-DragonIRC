@@ -29,6 +29,7 @@ public class Config {
         itbPart = RUtils.colorize(c.getString("messages.itb.part"));
         itbQuit = RUtils.colorize(c.getString("messages.itb.quit"));
         itbKick = RUtils.colorize(c.getString("messages.itb.kick"));
+        itbNick = RUtils.colorize(c.getString("messages.itb.nick"));
 
         btiMessage = RUtils.colorize(c.getString("messages.bti.message"));
         btiAction = RUtils.colorize(c.getString("messages.bti.action"));
@@ -74,6 +75,7 @@ public class Config {
     public static String itbPart;
     public static String itbQuit;
     public static String itbKick;
+    public static String itbNick;
 
     public static String btiMessage;
     public static String btiAction;
