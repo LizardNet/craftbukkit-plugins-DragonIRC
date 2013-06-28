@@ -43,6 +43,10 @@ public class CmdIRCMessage implements CommandExecutor {
                 cs.sendMessage(ChatColor.RED + "That user is not in the channel!");
                 return true;
             }
+            if (u.getNick().equalsIgnoreCase(bot.getBackend().getNick())) {
+                cs.sendMessage(ChatColor.RED + "You can't message the bot!");
+                return true;
+            }
             String send = Config.btuMessage;
             send = send.replace("{name}", cs.getName());
             send = send.replace("{message}", message);
