@@ -19,6 +19,10 @@ commands:
     description: Kicks a user from a channel on IRC.
     aliases: [ik]
     usage: /<command> [server] [channel] [user] (reason)
+  ircrestartbots:
+    description: Restarts all IRC bots.
+    aliases: [irb]
+    usage: /<command>
 
 permissions:
   royalirc.*:
@@ -27,6 +31,8 @@ permissions:
     children:
       royalirc.royalirc: true
       royalirc.ircmessage: true
+      royalirc.irckick: true
+      royalirc.ircrestartbots: true
   royalirc.royalirc:
     description: Allows /royalirc.
     default: op
@@ -35,4 +41,7 @@ permissions:
     default: op
   royalirc.irckick:
     description: Allows /irckick.
+    default: op
+  royalirc.ircrestartbots:
+    description: Allows /ircrestartbots.
     default: op

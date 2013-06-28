@@ -5,6 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.User;
+import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
 import org.royaldev.royalirc.irclisteners.IChatListener;
@@ -110,6 +111,11 @@ public class BotHandler {
                 bot.getBackend().quitServer("RoyalIRC disabled.");
             }
         }
+    }
+
+    public void clearListenerManager() {
+        final Listener[] ls = lm.getListeners().toArray(new Listener[lm.getListeners().size()]);
+        for (Listener l : ls) lm.removeListener(l);
     }
 
     public List<RoyalIRCBot> getBots() {

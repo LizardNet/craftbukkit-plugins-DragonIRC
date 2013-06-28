@@ -7,6 +7,7 @@ import org.royaldev.royalirc.bukkitlistener.BChatListener;
 import org.royaldev.royalirc.bukkitlistener.BServerListener;
 import org.royaldev.royalirc.commands.CmdIRCKick;
 import org.royaldev.royalirc.commands.CmdIRCMessage;
+import org.royaldev.royalirc.commands.CmdIRCRestartBots;
 import org.royaldev.royalirc.commands.CmdRoyalIRC;
 
 import java.util.regex.Matcher;
@@ -53,6 +54,7 @@ public class RoyalIRC extends JavaPlugin {
         getCommand("royalirc").setExecutor(new CmdRoyalIRC(this));
         getCommand("ircmessage").setExecutor(new CmdIRCMessage(this));
         getCommand("irckick").setExecutor(new CmdIRCKick(this));
+        getCommand("ircrestartbots").setExecutor(new CmdIRCRestartBots(this));
 
         //-- Hidendra's Metrics --//
 
