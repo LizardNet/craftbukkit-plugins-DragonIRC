@@ -30,7 +30,7 @@ public class IPCmdPart extends ListenerAdapter {
             return;
         }
         final Channel c = e.getBot().getChannel(channel);
-        if (!RUtils.containsChannel(e.getBot().getChannels(), c)) {
+        if (!e.getBot().channelExists(c.getName())) {
             e.respond("Not in that channel.");
             return;
         }

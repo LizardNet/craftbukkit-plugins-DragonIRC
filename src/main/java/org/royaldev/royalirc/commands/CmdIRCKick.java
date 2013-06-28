@@ -41,8 +41,8 @@ public class CmdIRCKick implements CommandExecutor {
                 return true;
             }
             final Channel c = rib.getBackend().getChannel(channel);
-            if (!RUtils.containsChannel(rib.getBackend().getChannels(), c)) {
-                cs.sendMessage(ChatColor.RED + "Not in that channel!");
+            if (!rib.getBackend().channelExists(c.getName())) {
+                cs.sendMessage(ChatColor.RED + "Bot is not in that channel!");
                 return true;
             }
             final User u = rib.getBackend().getUser(user);
