@@ -24,6 +24,7 @@ public class CmdIRCRestartBots implements CommandExecutor {
             plugin.bh.disconnect();
             plugin.bh.clearListenerManager();
             plugin.bh.createBots();
+            return true;
         }
         return false;
     }
