@@ -54,6 +54,23 @@ public class BChatListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
+    public void onSay(PlayerCommandPreprocessEvent e) {
+        boolean isAction = false;
+        String commandUsed = "";
+        for (String start : Config.sayAliases) {
+            if (!e.getMessage().startsWith(start)) continue;
+            commandUsed = start;
+            isAction = true;
+            break;
+        }
+        if (!isAction) return;
+        String message = Config.btiSay;
+        message = replaceVars(e, message);
+        message = message.replace("{message}", e.getMessage().substring(commandUsed.length()));
+        plugin.bh.sendMessage(message);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent e) { // login too early for vanish
         if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getPlayer())) return;
         String message = Config.btiLogin;

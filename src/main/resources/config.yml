@@ -61,13 +61,25 @@ settings:
   comment_character: "#"
   # Character to use before IRC commands
   fantasy_character: "."
-  # Admins that can use privmsg commands - only use temporarily, as they are not verified, so someone could steal your
-  # nick and have access.
-  admins:
-  - jkcclemens
-  # Mods that can use in-channel commands - must have chan half-op
-  mods:
-  - WizardCM
+  auth:
+    # Admins that can use privmsg commands - only use temporarily, as they are not verified, so someone could steal your
+    # nick and have access.
+    admins:
+    - jkcclemens
+    # Mods that can use in-channel commands - must have chan half-op
+    mods:
+    - WizardCM
+    # Hashes of keys that mods can use to escalate to admin power. This provides security by removing the need to add
+    # users to the admins category, which is unsafe to use for long periods of time. The hashes are in SHA-512 format,
+    # and they can be obtained at https://royaldev.org/royalirc/hash/
+    keys:
+      # Random string of characters to secure the hashes generated above. It is recommended to change this from the
+      # default.
+      salt: "Aa*2=4wHZ@0ziS)6/8Ge"
+      # Put the hashes for each user here in a user: "hash" format.
+      users:
+        # abc123 with default salt.
+        WizardCM: "b1dea0c96d119ea906120a6b994d2b31b10cfe625bfdf01595e0d4fa1b7285f775c8cefd2dafafd1fdebd3872fe0f3dda46fc6fa426a2b003efee65946eb7315"
 
 # Message formats
 messages:

@@ -13,7 +13,7 @@ public class IPCmdJoin extends ListenerAdapter {
         final String command = RUtils.getFirstWord(e.getMessage());
         if (!command.equalsIgnoreCase("join")) return;
         final User u = e.getUser();
-        if (!RUtils.isAdmin(u.getNick())) {
+        if (!RUtils.isAuthedOrAdmin(u.getNick(), u.getServer())) {
             e.respond("You are not allowed to do this.");
             return;
         }

@@ -53,9 +53,9 @@ public class Config {
         defaultReason = c.getString("messages.default_reason");
 
         actionAliases = c.getStringList("commands.bukkit.action");
-        admins = c.getStringList("settings.admins");
+        admins = c.getStringList("settings.auth.admins");
         sayAliases = c.getStringList("commands.bukkit.say");
-        mods = c.getStringList("settings.mods");
+        mods = c.getStringList("settings.auth.mods");
 
         commentChar = c.getString("settings.comment_character").charAt(0);
         fantasyChar = c.getString("settings.fantasy_character").charAt(0);
