@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
+import org.royaldev.royalirc.PermissionHandler;
 import org.royaldev.royalirc.RUtils;
 
 public class IPCmdPrivmsg extends ListenerAdapter {
@@ -14,7 +15,7 @@ public class IPCmdPrivmsg extends ListenerAdapter {
         final String command = RUtils.getFirstWord(e.getMessage());
         if (!command.equalsIgnoreCase("privmsg")) return;
         final User u = e.getUser();
-        if (!RUtils.isAuthedOrAdmin(u.getNick(), u.getServer())) {
+        if (!PermissionHandler.isAuthedOrAdmin(u.getNick(), u.getServer())) {
             e.respond("You are not allowed to do this.");
             return;
         }

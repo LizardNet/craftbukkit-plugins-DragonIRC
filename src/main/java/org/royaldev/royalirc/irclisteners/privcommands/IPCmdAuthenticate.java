@@ -5,6 +5,7 @@ import org.apache.commons.lang.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
+import org.royaldev.royalirc.PermissionHandler;
 import org.royaldev.royalirc.RUtils;
 import org.royaldev.royalirc.RoyalIRC;
 
@@ -33,7 +34,7 @@ public class IPCmdAuthenticate extends ListenerAdapter {
         final String command = RUtils.getFirstWord(e.getMessage());
         if (!command.equalsIgnoreCase("authenticate")) return;
         final User u = e.getUser();
-        if (!RUtils.atLeastMod(u.getNick())) {
+        if (!PermissionHandler.atLeastMod(u.getNick())) {
             e.respond("You are not allowed to do this.");
             return;
         }
@@ -60,7 +61,7 @@ public class IPCmdAuthenticate extends ListenerAdapter {
             e.respond("Invalid key!");
             return;
         }
-        RUtils.setAuthenticated(u.getNick(), u.getServer(), true);
+        PermissionHandler.setAuthenticated(u.getNick(), u.getServer(), true);
         e.respond("Authenticated!");
     }
 }

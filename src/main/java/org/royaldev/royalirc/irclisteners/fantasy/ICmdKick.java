@@ -7,6 +7,7 @@ import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.PermissionHandler;
 import org.royaldev.royalirc.RUtils;
 import org.royaldev.royalirc.RoyalIRC;
 
@@ -24,7 +25,7 @@ public class ICmdKick extends ListenerAdapter {
         final String command = RUtils.getFantasyCommand(e.getMessage());
         if (!command.equalsIgnoreCase("kick")) return;
         final User u = e.getUser();
-        if (!RUtils.atLeastMod(u.getNick()) || !RUtils.atLeastHalfOp(u, e.getChannel())) {
+        if (!PermissionHandler.atLeastMod(u.getNick()) || !PermissionHandler.atLeastHalfOp(u, e.getChannel())) {
             e.respond("You do not have permission for that.");
             return;
         }

@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.royaldev.royalirc.Config;
+import org.royaldev.royalirc.PermissionHandler;
 import org.royaldev.royalirc.RUtils;
 import org.royaldev.royalirc.RoyalIRC;
 import org.royaldev.royalirc.RoyalIRCBot;
@@ -50,7 +51,7 @@ public class CmdIRCKick implements CommandExecutor {
                 cs.sendMessage(ChatColor.RED + "User not in that channel!");
                 return true;
             }
-            if (!RUtils.atLeastOp(rib.getBackend().getUserBot(), c))
+            if (!PermissionHandler.atLeastOp(rib.getBackend().getUserBot(), c))
                 cs.sendMessage(ChatColor.RED + "Not chanop in that channel; still trying kick.");
             rib.getBackend().kick(c, u, cs.getName() + ": " + reason);
             cs.sendMessage(ChatColor.BLUE + "Attempted to kick " + ChatColor.GRAY + u.getNick() + ChatColor.BLUE + " from " + ChatColor.GRAY + c.getName() + ChatColor.BLUE + " for " + ChatColor.GRAY + reason + ChatColor.BLUE + ".");
