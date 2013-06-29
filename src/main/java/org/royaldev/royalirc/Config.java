@@ -62,7 +62,8 @@ public class Config {
 
         linkChannels = c.getBoolean("settings.link_channels");
         allowColors = c.getBoolean("settings.colors.allow_colors");
-        parseColors = c.getBoolean("settings.colors.parse_colors");
+        parseMinecraftColors = c.getBoolean("settings.colors.parse_minecraft_colors");
+        parseIRCToMinecraftColors = c.getBoolean("settings.colors.parse_irc_minecraft_colors");
         defaultConfig = c.getBoolean("default_config");
         rejoinOnKick = c.getBoolean("settings.on_kick.rejoin");
         useSyncChat = c.getBoolean("settings.use_sync_chat");
@@ -109,7 +110,8 @@ public class Config {
 
     public static boolean linkChannels;
     public static boolean allowColors;
-    public static boolean parseColors;
+    public static boolean parseMinecraftColors;
+    public static boolean parseIRCToMinecraftColors;
     public static boolean defaultConfig;
     public static boolean rejoinOnKick;
     public static boolean useSyncChat;

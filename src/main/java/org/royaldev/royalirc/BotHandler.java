@@ -36,7 +36,7 @@ public class BotHandler {
     }
 
     private String convertMessages(String s) {
-        if (Config.parseColors) s = ChatColor.translateAlternateColorCodes('&', s);
+        if (Config.parseMinecraftColors) s = ChatColor.translateAlternateColorCodes('&', s);
         if (Config.allowColors) s = RUtils.minecraftColorstoIRCColors(s);
         else s = ChatColor.stripColor(s);
         return s;
@@ -112,10 +112,13 @@ public class BotHandler {
     }
 
     public void disconnect() {
-        synchronized (bots) {
-            for (RoyalIRCBot bot : bots) {
-                bot.getBackend().quitServer("RoyalIRC disabled.");
+        try {
+            synchronized (bots) {
+                for (final RoyalIRCBot bot : bots) {
+                    bot.getBackend().quitServer("RoyalIRC disabled.");
+                }
             }
+        } catch (Exception ignored) {
         }
     }
 

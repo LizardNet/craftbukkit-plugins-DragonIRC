@@ -1,5 +1,6 @@
 package org.royaldev.royalirc.irclisteners;
 
+import org.bukkit.ChatColor;
 import org.pircbotx.hooks.Event;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ActionEvent;
@@ -34,6 +35,11 @@ public class IChatListener extends ListenerAdapter {
         return s;
     }
 
+    private String parseColors(String s) {
+        if (!Config.parseIRCToMinecraftColors) return s;
+        return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
     @Override
     public void onMessage(MessageEvent e) {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
@@ -43,6 +49,7 @@ public class IChatListener extends ListenerAdapter {
         message = replaceVars(e, message);
         message = message.replace("{channel}", e.getChannel().getName());
         message = replaceVarsGeneric(e, message);
+        message = parseColors(message);
         plugin.sendToMinecraft(message);
     }
 

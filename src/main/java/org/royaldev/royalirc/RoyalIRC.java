@@ -88,10 +88,7 @@ public class RoyalIRC extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        try {
-            bh.disconnect();
-        } catch (Exception ignored) {
-        }
+        bh.disconnect();
     }
 
 }

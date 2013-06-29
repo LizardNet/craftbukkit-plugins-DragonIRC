@@ -59,7 +59,9 @@ settings:
     # Allow colors to be sent between IRC and MC?
     allow_colors: true
     # Parse colors from MC (turn & into section signs?)
-    parse_colors: true
+    parse_minecraft_colors: true
+    # Parse Minecraft colors (&) from IRC messages?
+    parse_irc_minecraft_colors: false
   # Character to use before a message to stop it from being sent to MC
   comment_character: "#"
   # Character to use before IRC commands

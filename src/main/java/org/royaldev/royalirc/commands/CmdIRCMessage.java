@@ -50,7 +50,7 @@ public class CmdIRCMessage implements CommandExecutor {
             String send = Config.btuMessage;
             send = send.replace("{name}", cs.getName());
             send = send.replace("{message}", message);
-            if (Config.parseColors) message = ChatColor.translateAlternateColorCodes('&', message);
+            if (Config.parseMinecraftColors) message = ChatColor.translateAlternateColorCodes('&', message);
             if (Config.allowColors) message = RUtils.minecraftColorstoIRCColors(message);
             else message = ChatColor.stripColor(message);
             u.sendMessage(send);
