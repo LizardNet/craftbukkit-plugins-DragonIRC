@@ -65,6 +65,7 @@ public class Config {
         parseColors = c.getBoolean("settings.colors.parse_colors");
         defaultConfig = c.getBoolean("default_config");
         rejoinOnKick = c.getBoolean("settings.on_kick.rejoin");
+        useSyncChat = c.getBoolean("settings.use_sync_chat");
 
         rejoinWaitTime = c.getInt("settings.on_kick.time");
     }
@@ -111,6 +112,7 @@ public class Config {
     public static boolean parseColors;
     public static boolean defaultConfig;
     public static boolean rejoinOnKick;
+    public static boolean useSyncChat;
 
     public static int rejoinWaitTime;
 

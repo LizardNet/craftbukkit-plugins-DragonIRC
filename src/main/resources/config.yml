@@ -43,6 +43,9 @@ servers:
 
 # General settings
 settings:
+  # Use sync chat events instead of async events? This may be required on Windows. It is most likely safe to turn this
+  # to false on Linux.
+  use_sync_chat: true
   # Link multiple servers and channels together?
   link_channels: true
   # What to do when kicked
