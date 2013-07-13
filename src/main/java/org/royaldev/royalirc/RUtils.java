@@ -109,6 +109,8 @@ public class RUtils {
         s = s.replace(ChatColor.UNDERLINE.toString(), Colors.UNDERLINE);
         s = s.replace(ChatColor.WHITE.toString(), Colors.WHITE);
         s = s.replace(ChatColor.YELLOW.toString(), Colors.YELLOW);
+        s = s.replace(ChatColor.RESET.toString(), Colors.NORMAL);
+        s = s.replace(ChatColor.GOLD.toString(), Colors.YELLOW);
         s = ChatColor.stripColor(s); // catch any stragglers
         return s;
     }
