@@ -5,6 +5,7 @@ import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.KickEvent;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.NickChangeEvent;
 import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 import org.royaldev.royalirc.Config;
@@ -91,6 +92,16 @@ public class IChatRelay extends ListenerAdapter {
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{message}", reason);
+        plugin.bh.sendMessageToOtherServers(message, e.getBot().getServer());
+    }
+
+    @Override
+    public void onNickChange(NickChangeEvent e) {
+        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        String message = Config.itbNick;
+        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{name}", e.getOldNick());
+        message = message.replace("{newname}", e.getNewNick());
         plugin.bh.sendMessageToOtherServers(message, e.getBot().getServer());
     }
 }
