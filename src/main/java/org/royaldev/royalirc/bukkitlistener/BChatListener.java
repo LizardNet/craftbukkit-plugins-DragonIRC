@@ -104,7 +104,7 @@ public class BChatListener implements Listener {
         String message = Config.btiKick;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = replaceVars(e, message);
-        message = message.replace("{message}", reason);
+        message = message.replace("{message}", reason.replaceAll("\\r?\\n", " "));
         plugin.bh.sendMessage(message);
     }
 
