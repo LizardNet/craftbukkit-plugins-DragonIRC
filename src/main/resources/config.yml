@@ -98,6 +98,7 @@ messages:
     part: "[{server}/{channel}] {name} parted the room: {message}."
     quit: "[{server}] {name} quit the server: {message}."
     kick: "[{server}/{channel}] {name} was kicked from the room by {kicker}: {message}."
+    nick: "[{server} {name} is now known as {newname}."
   # IRC -> Bukkit
   itb:
     message: "&9[&aIRC&9]&r ({channel}) {name}&r: {message}"
@@ -106,7 +107,7 @@ messages:
     part: "&9[&aIRC&9]&r ({channel}) {name} parted the channel: {message}."
     quit: "&9[&aIRC&9]&r ({server}) {name} quit the server: {message}."
     kick: "&9[&aIRC&9]&r ({channel}) {name} was kicked by {kicker}: {message}."
-    nick: "&9[&aIRC&9]&r ({server}) {name} changed his nick to {newname}"
+    nick: "&9[&aIRC&9]&r ({server}) {name} is now known as {newname}"
   # Bukkit -> IRC
   bti:
     message: "<{name}> {message}"

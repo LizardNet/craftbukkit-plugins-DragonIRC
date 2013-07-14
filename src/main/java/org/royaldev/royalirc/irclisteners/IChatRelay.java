@@ -97,8 +97,9 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent e) {
+        if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
-        String message = Config.itbNick;
+        String message = Config.itiNick;
         message = message.replace("{server}", e.getBot().getServer());
         message = message.replace("{name}", e.getOldNick());
         message = message.replace("{newname}", e.getNewNick());
