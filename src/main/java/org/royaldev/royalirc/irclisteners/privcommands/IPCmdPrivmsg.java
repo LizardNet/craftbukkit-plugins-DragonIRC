@@ -27,8 +27,8 @@ public class IPCmdPrivmsg extends ListenerAdapter {
         }
         String sendTo = args[0];
         String message = StringUtils.join(args, " ", 1, args.length);
-        final User t = e.getBot().getUser(sendTo);
-        t.sendMessage(message);
+        final User t = e.getBot().getUserChannelDao().getUser(sendTo);
+        t.send().message(message);
         e.respond("Sent message \"" + message + "\" to " + t.getNick() + ".");
     }
 }

@@ -37,6 +37,7 @@ public class BChatListener implements Listener {
         plugin.bh.sendMessage(message);
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR)
     public void syncOnChat(PlayerChatEvent e) {
         if (!Config.useSyncChat) return;

@@ -41,19 +41,24 @@ public class CmdIRCKick implements CommandExecutor {
                 cs.sendMessage(ChatColor.RED + "No such server!");
                 return true;
             }
-            final Channel c = rib.getBackend().getChannel(channel);
-            if (!rib.getBackend().channelExists(c.getName())) {
+            Channel c = null;
+            for (Channel ch : rib.getBackend().getUserBot().getChannels()) {
+                if (!ch.getName().equalsIgnoreCase(channel)) continue;
+                c = ch;
+                break;
+            }
+            if (c == null) {
                 cs.sendMessage(ChatColor.RED + "Bot is not in that channel!");
                 return true;
             }
-            final User u = rib.getBackend().getUser(user);
+            final User u = rib.getBackend().getUserChannelDao().getUser(user);
             if (!c.getUsers().contains(u)) {
                 cs.sendMessage(ChatColor.RED + "User not in that channel!");
                 return true;
             }
             if (!PermissionHandler.atLeastOp(rib.getBackend().getUserBot(), c))
                 cs.sendMessage(ChatColor.RED + "Not chanop in that channel; still trying kick.");
-            rib.getBackend().kick(c, u, cs.getName() + ": " + reason);
+            c.send().kick(u, cs.getName() + ": " + reason);
             cs.sendMessage(ChatColor.BLUE + "Attempted to kick " + ChatColor.GRAY + u.getNick() + ChatColor.BLUE + " from " + ChatColor.GRAY + c.getName() + ChatColor.BLUE + " for " + ChatColor.GRAY + reason + ChatColor.BLUE + ".");
             return true;
         }

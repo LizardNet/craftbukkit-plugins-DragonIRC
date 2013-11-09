@@ -38,7 +38,7 @@ public class CmdIRCMessage implements CommandExecutor {
                 cs.sendMessage(ChatColor.RED + "No such server!");
                 return true;
             }
-            final User u = bot.getBackend().getUser(user);
+            final User u = bot.getBackend().getUserChannelDao().getUser(user);
             if (!plugin.bh.userInChannels(u)) {
                 cs.sendMessage(ChatColor.RED + "That user is not in the channel!");
                 return true;
@@ -53,7 +53,7 @@ public class CmdIRCMessage implements CommandExecutor {
             if (Config.parseMinecraftColors) message = ChatColor.translateAlternateColorCodes('&', message);
             if (Config.allowColors) message = RUtils.minecraftColorstoIRCColors(message);
             else message = ChatColor.stripColor(message);
-            u.sendMessage(send);
+            u.send().message(send);
             String confirm = Config.btuConfirm;
             confirm = confirm.replace("{name}", cs.getName());
             confirm = confirm.replace("{message}", message);

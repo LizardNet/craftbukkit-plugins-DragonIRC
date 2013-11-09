@@ -52,12 +52,12 @@ public class RUtils {
     }
 
     public static boolean sameChannels(Channel a, Channel b) {
-        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServer().equalsIgnoreCase(b.getBot().getServer());
+        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServerInfo().getServerName().equalsIgnoreCase(b.getBot().getServerInfo().getServerName());
     }
 
     public static boolean containsChannel(Collection<Channel> cs, Channel lookFor) {
         for (Channel c : cs) {
-            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServer().equalsIgnoreCase(lookFor.getBot().getServer()))
+            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServerInfo().getServerName().equalsIgnoreCase(lookFor.getBot().getServerInfo().getServerName()))
                 continue;
             return true;
         }

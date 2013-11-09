@@ -30,7 +30,7 @@ public class IChatListener extends ListenerAdapter {
     }
 
     private String replaceVarsGeneric(Event e, String s) {
-        s = s.replace("{server}", e.getBot().getServer());
+        s = s.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         s = s.replace("{botname}", e.getBot().getNick());
         return s;
     }
@@ -92,7 +92,7 @@ public class IChatListener extends ListenerAdapter {
         message = message.replace("{name}", e.getRecipient().getNick());
         message = message.replace("{message}", reason);
         message = message.replace("{channel}", e.getChannel().getName());
-        message = message.replace("{kicker}", e.getSource().getNick());
+        message = message.replace("{kicker}", e.getUser().getNick());
         message = replaceVarsGeneric(e, message);
         plugin.sendToMinecraft(message);
     }
