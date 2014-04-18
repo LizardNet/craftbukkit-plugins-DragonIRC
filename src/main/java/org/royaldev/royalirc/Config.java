@@ -37,6 +37,7 @@ public class Config {
         btiQuit = RUtils.colorize(c.getString("messages.bti.quit"));
         btiKick = RUtils.colorize(c.getString("messages.bti.kick"));
         btiSay = RUtils.colorize(c.getString("messages.bti.say"));
+        btiDeath = RUtils.colorize(c.getString("messages.bti.death"));
 
         itiMessage = c.getString("messages.iti.message");
         itiAction = c.getString("messages.iti.action");
@@ -67,6 +68,7 @@ public class Config {
         defaultConfig = c.getBoolean("default_config");
         rejoinOnKick = c.getBoolean("settings.on_kick.rejoin");
         useSyncChat = c.getBoolean("settings.use_sync_chat");
+        reportPlayerDeaths = c.getBoolean("settings.report_player_deaths");
 
         rejoinWaitTime = c.getInt("settings.on_kick.time");
     }
@@ -85,6 +87,7 @@ public class Config {
     public static String btiQuit;
     public static String btiKick;
     public static String btiSay;
+    public static String btiDeath;
 
     public static String itiMessage;
     public static String itiAction;
@@ -115,6 +118,7 @@ public class Config {
     public static boolean defaultConfig;
     public static boolean rejoinOnKick;
     public static boolean useSyncChat;
+    public static boolean reportPlayerDeaths;
 
     public static int rejoinWaitTime;
 

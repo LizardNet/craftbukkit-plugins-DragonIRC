@@ -66,6 +66,8 @@ settings:
   comment_character: "#"
   # Character to use before IRC commands
   fantasy_character: "."
+  # Should the bot report player deaths to IRC
+  report_player_deaths: true
   auth:
     # Admins that can use privmsg commands - only use temporarily, as they are not verified, so someone could steal your
     # nick and have access.
@@ -115,6 +117,8 @@ messages:
     quit: "[{name} disconnected.]"
     kick: "[{name} was kicked: {message}.]"
     say: "[Server] {message}"
+    # Note: Death message format setting below only used if report_player_deaths above is true.
+    death: "[{name} died: {message}.]"
   # Bukkit User -> IRC User
   btu:
     # Message to appear to IRC user
