@@ -5,6 +5,10 @@ DRAGONIRC AUTHORS
 **Website: https://fastlizard4.org
 **PGP Key ID: 70D9 82A5 6B59 9229 7B99  1709 221A 627D D76E 2616
 
+*William Luc Ritchie
+**Email: luc [dot] ritchie [at] gmail [dot] com
+**PGP Key ID: 8B13 1400 1489 D903 9203  B253 9683 BCE5 1A35 6CC6
+
 Anyone who commits to this project should be added to this list, even for a
 single minor commit!
 
