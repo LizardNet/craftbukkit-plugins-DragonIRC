@@ -1,0 +1,5 @@
+[gerrit]
+host=gerrit.fastlizard4.org
+port=1234
+project=craftbukkit-plugins/DragonIRC.git
+defaultbranch=master
