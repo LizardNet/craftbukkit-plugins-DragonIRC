@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da6255ed_0caa97d4",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2015-08-02T10:27:06Z",
+      "side": 1,
+      "message": "If we go by the standard we\u0027ve set with DMC2 and golden-anvil, this should be \"org.fastlizard4.git.craftbukkit-plugins\".  Thoughts?",
+      "revId": "ea70c54d13415866d4adb95a0c943a664703b005",
+      "serverId": "cf5d0eaf-4814-484b-b55f-41cd7f22928e",
+      "unresolved": false
+    }
+  ]
+}
