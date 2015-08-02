@@ -1,10 +1,65 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.royaldev</groupId>
-    <artifactId>RoyalIRC</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
-    <name>RoyalIRC</name>
+
+    <groupId>org.fastlizard4</groupId>
+    <artifactId>dragonirc</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>DragonIRC</name>
+    <description>A Bukkit plugin to bridge Minecraft chat to IRC</description>
+    <url>https://git.fastlizard4.org/gitblit/summary/?r=craftbukkit-plugins/DragonIRC.git</url>
+    <inceptionYear>2015</inceptionYear>
+    <licenses>
+        <license>
+            <name>GNU General Public License, Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <organization>
+        <name>LizardNet Minecraft</name>
+        <url>https://fastlizard4.org/wiki/Minecraft_servers</url>
+    </organization>
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://integration.fastlizard4.org</url>
+    </ciManagement>
+    <scm>
+        <connection>scm:git:https://github.com/LizardNet/craftbukkit-plugins-DragonIRC.git</connection>
+        <developerConnection>scm:git:ssh://gerrit.fastlizard4.org:1234/craftbukkit-plugins/DragonIRC.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://git.fastlizard4.org/gitblit/summary/?r=craftbukkit-plugins/DragonIRC.git</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.build.timestamp.format>yyyyMMdd.kkmmss</maven.build.timestamp.format>
+        <BUILD_NUMBER>local-${maven.build.timestamp}</BUILD_NUMBER>
+        <pluginversion>${project.version}-${BUILD_NUMBER}</pluginversion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.7.9-R0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pircbotx</groupId>
+            <artifactId>pircbotx</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>${project.name}-${project.version}</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -44,40 +99,11 @@
             </resource>
         </resources>
     </build>
+
     <repositories>
         <repository>
-            <id>royal-repo</id>
-            <url>http://minor.royaldev.org:8081/nexus/content/groups/public/</url>
+            <id>lizardnet-integration</id>
+            <url>https://integration.fastlizard4.org:444/jenkins/plugin/repository/everything/</url>
         </repository>
     </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kitteh</groupId>
-            <artifactId>VanishNoPacket</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <dependency>
-            <groupId>org.pircbotx</groupId>
-            <artifactId>pircbotx</artifactId>
-            <version>1.9</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-nop</artifactId>
-            <version>1.7.5</version>
-        </dependency>
-    </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.build.timestamp.format>yyyyMMdd.kkmmss</maven.build.timestamp.format>
-        <BUILD_NUMBER>local-${maven.build.timestamp}</BUILD_NUMBER>
-        <pluginversion>${project.version}-${BUILD_NUMBER}</pluginversion>
-    </properties>
 </project>

@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.royaldev.royalirc.Config;
 import org.royaldev.royalirc.RoyalIRC;
-import org.royaldev.royalirc.VNPHandler;
 
 public class BChatListener implements Listener {
 
@@ -86,7 +85,6 @@ public class BChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent e) { // login too early for vanish
-        if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getPlayer())) return;
         String message = Config.btiLogin;
         message = replaceVars(e, message);
         plugin.bh.sendMessage(message);
@@ -94,7 +92,6 @@ public class BChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent e) {
-        if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getPlayer())) return;
         String message = Config.btiQuit;
         message = replaceVars(e, message);
         plugin.bh.sendMessage(message);
@@ -102,7 +99,6 @@ public class BChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onKick(PlayerKickEvent e) {
-        if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getPlayer())) return;
         String message = Config.btiKick;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = replaceVars(e, message);
@@ -113,7 +109,6 @@ public class BChatListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(PlayerDeathEvent e) {
         if (!Config.reportPlayerDeaths) return;
-        if (plugin.vanishLoaded() && VNPHandler.isVanished(e.getEntity())) return;
         String message = Config.btiDeath;
         message = message.replace("{name}", e.getEntity().getDisplayName());
         message = message.replace("{message}", e.getDeathMessage());
