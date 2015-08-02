@@ -52,12 +52,12 @@ public class RUtils {
     }
 
     public static boolean sameChannels(Channel a, Channel b) {
-        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServer().equalsIgnoreCase(b.getBot().getServer());
+        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServerInfo().getServerName().equalsIgnoreCase(b.getBot().getServerInfo().getServerName());
     }
 
     public static boolean containsChannel(Collection<Channel> cs, Channel lookFor) {
         for (Channel c : cs) {
-            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServer().equalsIgnoreCase(lookFor.getBot().getServer()))
+            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServerInfo().getServerName().equalsIgnoreCase(lookFor.getBot().getServerInfo().getServerName()))
                 continue;
             return true;
         }
@@ -109,6 +109,8 @@ public class RUtils {
         s = s.replace(ChatColor.UNDERLINE.toString(), Colors.UNDERLINE);
         s = s.replace(ChatColor.WHITE.toString(), Colors.WHITE);
         s = s.replace(ChatColor.YELLOW.toString(), Colors.YELLOW);
+        s = s.replace(ChatColor.RESET.toString(), Colors.NORMAL);
+        s = s.replace(ChatColor.GOLD.toString(), Colors.YELLOW);
         s = ChatColor.stripColor(s); // catch any stragglers
         return s;
     }

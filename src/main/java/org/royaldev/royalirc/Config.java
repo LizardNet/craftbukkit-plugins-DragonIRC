@@ -45,6 +45,7 @@ public class Config {
         itiPart = c.getString("messages.iti.part");
         itiQuit = c.getString("messages.iti.quit");
         itiKick = c.getString("messages.iti.kick");
+        itiNick = c.getString("messages.iti.nick");
 
         btuMessage = c.getString("messages.btu.message");
         btuConfirm = RUtils.colorize(c.getString("messages.btu.confirm"));
@@ -95,6 +96,7 @@ public class Config {
     public static String itiPart;
     public static String itiQuit;
     public static String itiKick;
+    public static String itiNick;
 
     public static String btuMessage;
     public static String btuConfirm;

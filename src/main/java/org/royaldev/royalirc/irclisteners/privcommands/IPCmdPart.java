@@ -30,12 +30,17 @@ public class IPCmdPart extends ListenerAdapter {
             e.respond("Channel must start with \"#\" to be valid!");
             return;
         }
-        final Channel c = e.getBot().getChannel(channel);
-        if (!e.getBot().channelExists(c.getName())) {
+        Channel c = null;
+        for (Channel ch : e.getBot().getUserBot().getChannels()) {
+            if (!ch.getName().equalsIgnoreCase(channel)) continue;
+            c = ch;
+            break;
+        }
+        if (c == null) {
             e.respond("Not in that channel.");
             return;
         }
-        e.getBot().partChannel(c);
+        c.send().part();
         e.respond("Attempted to part channel " + channel + ".");
     }
 }

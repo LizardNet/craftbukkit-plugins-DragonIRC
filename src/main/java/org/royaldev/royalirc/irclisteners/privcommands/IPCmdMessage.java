@@ -39,7 +39,7 @@ public class IPCmdMessage extends ListenerAdapter {
         if (Config.allowColors) message = RUtils.ircColorsToMinecraftColors(message);
         else message = Colors.removeFormattingAndColors(message);
         String send = Config.ituMessage;
-        send = send.replace("{server}", e.getBot().getServer());
+        send = send.replace("{server}", e.getBot().getServerInfo().getServerName());
         send = send.replace("{name}", u.getNick());
         send = send.replace("{message}", message);
         t.sendMessage(send);

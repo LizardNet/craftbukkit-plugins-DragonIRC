@@ -5,6 +5,7 @@ import org.pircbotx.hooks.events.ActionEvent;
 import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.KickEvent;
 import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.NickChangeEvent;
 import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 import org.royaldev.royalirc.Config;
@@ -25,7 +26,7 @@ public class IChatRelay extends ListenerAdapter {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         if (RUtils.isFantasyCommand(e.getMessage())) return;
         String message = Config.itiMessage;
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
         message = message.replace("{message}", e.getMessage());
@@ -37,7 +38,7 @@ public class IChatRelay extends ListenerAdapter {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiAction;
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
         message = message.replace("{message}", e.getMessage());
@@ -49,7 +50,7 @@ public class IChatRelay extends ListenerAdapter {
         if (!Config.linkChannels) return;
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiJoin;
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
         plugin.bh.sendMessageToOtherChannels(message, e.getChannel());
@@ -61,11 +62,11 @@ public class IChatRelay extends ListenerAdapter {
         if (e.getRecipient().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiKick;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getRecipient().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
         message = message.replace("{message}", reason);
-        message = message.replace("{kicker}", e.getSource().getNick());
+        message = message.replace("{kicker}", e.getUser().getNick());
         plugin.bh.sendMessageToOtherChannels(message, e.getChannel());
     }
 
@@ -75,7 +76,7 @@ public class IChatRelay extends ListenerAdapter {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiPart;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
         message = message.replace("{message}", reason);
@@ -88,9 +89,20 @@ public class IChatRelay extends ListenerAdapter {
         if (e.getUser().getNick().equals(e.getBot().getNick())) return;
         String message = Config.itiQuit;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
-        message = message.replace("{server}", e.getBot().getServer());
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{message}", reason);
-        plugin.bh.sendMessageToOtherServers(message, e.getBot().getServer());
+        plugin.bh.sendMessageToOtherServers(message, e.getBot().getConfiguration().getServerHostname());
+    }
+
+    @Override
+    public void onNickChange(NickChangeEvent e) {
+        if (!Config.linkChannels) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        String message = Config.itiNick;
+        message = message.replace("{server}", e.getBot().getConfiguration().getServerHostname());
+        message = message.replace("{name}", e.getOldNick());
+        message = message.replace("{newname}", e.getNewNick());
+        plugin.bh.sendMessageToOtherServers(message, e.getBot().getConfiguration().getServerHostname());
     }
 }

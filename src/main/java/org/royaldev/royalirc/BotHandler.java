@@ -61,9 +61,7 @@ public class BotHandler {
         ConfigurationSection servers = plugin.getConfig().getConfigurationSection("servers");
         for (String server : servers.getKeys(false)) {
             plugin.getLogger().info("Starting bot " + server + "...");
-            final RoyalIRCBot rib = new RoyalIRCBot(plugin, servers.getConfigurationSection(server));
-            plugin.getLogger().info("Adding listeners to bot " + server + "...");
-            rib.getBackend().setListenerManager(lm);
+            final RoyalIRCBot rib = new RoyalIRCBot(plugin, servers.getConfigurationSection(server), lm);
             synchronized (bots) {
                 bots.add(rib);
             }
@@ -75,25 +73,23 @@ public class BotHandler {
         message = convertMessages(message);
         synchronized (bots) {
             for (RoyalIRCBot bot : bots) {
-                for (Channel c : bot.getBackend().getChannels()) {
-                    c.sendMessage(message);
-                }
+                for (Channel c : bot.getBackend().getUserBot().getChannels()) c.send().message(message);
             }
         }
     }
 
     public void sendMessage(String message, Channel c) {
         message = convertMessages(message);
-        c.sendMessage(message);
+        c.send().message(message);
     }
 
     public void sendMessageToOtherChannels(String message, Channel dontSendTo) {
         message = convertMessages(message);
         synchronized (bots) {
             for (RoyalIRCBot bot : bots) {
-                for (Channel c : bot.getBackend().getChannels()) {
+                for (Channel c : bot.getBackend().getUserBot().getChannels()) {
                     if (RUtils.sameChannels(dontSendTo, c)) continue;
-                    c.sendMessage(message);
+                    c.send().message(message);
                 }
             }
         }
@@ -103,9 +99,9 @@ public class BotHandler {
         message = convertMessages(message);
         synchronized (bots) {
             for (RoyalIRCBot bot : bots) {
-                if (bot.getBackend().getServer().equals(dontSendTo)) continue;
-                for (Channel c : bot.getBackend().getChannels()) {
-                    c.sendMessage(message);
+                if (bot.getBackend().getServerInfo().getServerName().equals(dontSendTo)) continue;
+                for (Channel c : bot.getBackend().getUserBot().getChannels()) {
+                    c.send().message(message);
                 }
             }
         }
@@ -115,7 +111,7 @@ public class BotHandler {
         try {
             synchronized (bots) {
                 for (final RoyalIRCBot bot : bots) {
-                    bot.getBackend().quitServer("RoyalIRC disabled.");
+                    bot.getBackend().sendIRC().quitServer("RoyalIRC disabled.");
                 }
             }
         } catch (Exception ignored) {
@@ -133,7 +129,7 @@ public class BotHandler {
 
     public RoyalIRCBot getBotByServer(String server) {
         for (RoyalIRCBot rib : bots) {
-            if (!rib.getBackend().getServer().equalsIgnoreCase(server)) continue;
+            if (!rib.getBackend().getConfiguration().getServerHostname().equalsIgnoreCase(server)) continue;
             return rib;
         }
         return null;
@@ -141,8 +137,8 @@ public class BotHandler {
 
     public boolean userInChannels(User u) {
         for (Channel uC : u.getChannels()) {
-            for (Channel bC : u.getBot().getChannels()) {
-                if (!uC.equals(bC)) continue;
+            for (Channel bC : u.getBot().getUserBot().getChannels()) {
+                if (!uC.getName().equalsIgnoreCase(bC.getName())) continue;
                 return true;
             }
         }

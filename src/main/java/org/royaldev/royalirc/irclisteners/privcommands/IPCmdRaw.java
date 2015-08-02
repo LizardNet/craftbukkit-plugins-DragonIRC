@@ -26,7 +26,7 @@ public class IPCmdRaw extends ListenerAdapter {
             return;
         }
         String rawCommand = StringUtils.join(args, " ");
-        e.getBot().sendRawLine(rawCommand);
+        e.getBot().sendRaw().rawLine(rawCommand);
         e.respond("Attempted to send raw IRC line: " + rawCommand);
     }
 }

@@ -38,6 +38,7 @@ public class BChatListener implements Listener {
         plugin.bh.sendMessage(message);
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.MONITOR)
     public void syncOnChat(PlayerChatEvent e) {
         if (!Config.useSyncChat) return;
@@ -105,7 +106,7 @@ public class BChatListener implements Listener {
         String message = Config.btiKick;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = replaceVars(e, message);
-        message = message.replace("{message}", reason);
+        message = message.replace("{message}", reason.replaceAll("\\r?\\n", " "));
         plugin.bh.sendMessage(message);
     }
 

@@ -24,6 +24,8 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.pircbotx:pircbotx</include>
+                                    <include>org.slf4j:slf4j-api</include>
+                                    <include>org.slf4j:slf4j-nop</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -53,8 +55,6 @@
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>LATEST</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.kitteh</groupId>
@@ -66,9 +66,16 @@
             <artifactId>pircbotx</artifactId>
             <version>1.9</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.5</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <maven.build.timestamp.format>yyyyMMdd.kkmmss</maven.build.timestamp.format>
         <BUILD_NUMBER>local-${maven.build.timestamp}</BUILD_NUMBER>
         <pluginversion>${project.version}-${BUILD_NUMBER}</pluginversion>

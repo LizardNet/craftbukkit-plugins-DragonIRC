@@ -29,7 +29,7 @@ public class IPCmdJoin extends ListenerAdapter {
             e.respond("Channel must start with \"#\" to be valid!");
             return;
         }
-        e.getBot().joinChannel(channel);
+        e.getBot().sendIRC().joinChannel(channel);
         e.respond("Attempted to join channel " + channel + ".");
     }
 }
