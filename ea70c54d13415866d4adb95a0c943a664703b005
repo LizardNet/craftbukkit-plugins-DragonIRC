@@ -34,6 +34,24 @@
       "revId": "ea70c54d13415866d4adb95a0c943a664703b005",
       "serverId": "cf5d0eaf-4814-484b-b55f-41cd7f22928e",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da6255ed_0c81774a",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2015-08-02T23:37:00Z",
+      "side": 1,
+      "message": "Mmm, alright.  We\u0027ll stick with org.fastlizard4 then.  (We may want to likewise update the other Bukkit/CraftBukkit plugins we have in our repos too.)",
+      "parentUuid": "da6255ed_4c876f62",
+      "revId": "ea70c54d13415866d4adb95a0c943a664703b005",
+      "serverId": "cf5d0eaf-4814-484b-b55f-41cd7f22928e",
+      "unresolved": false
     }
   ]
 }
