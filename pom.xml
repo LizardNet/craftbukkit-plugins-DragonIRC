@@ -103,7 +103,7 @@
     <repositories>
         <repository>
             <id>lizardnet-integration</id>
-            <url>https://integration.fastlizard4.org:444/jenkins/plugin/repository/everything/</url>
+            <url>https://integration.fastlizard4.org:444/jenkins/plugin/repository/everything</url>
         </repository>
     </repositories>
 </project>
