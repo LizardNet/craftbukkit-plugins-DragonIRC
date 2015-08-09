@@ -1,15 +1,14 @@
-name: RoyalIRC
+name: DragonIRC
 version: ${pluginversion}
-main: org.royaldev.royalirc.RoyalIRC
-author: jkcclemens
-description: Minecraft <-> IRC link
-website: http://royaldev.org/
-softdepend: [VanishNoPacket]
+main: org.fastlizard4.dragonirc.DragonIRC
+authors: [FastLizard4, wlritchi]
+description: Minecraft chat to IRC bridge
+website: https://git.fastlizard4.org/gitblit/summary/?r=craftbukkit-plugins/DragonIRC.git
 
 commands:
-  royalirc:
+  dragonirc:
     description: Reloads the plugin.
-    aliases: [rirc]
+    aliases: [dirc]
     usage: /<command>
   ircmessage:
     description: Sends a message to a user on IRC.
@@ -25,23 +24,23 @@ commands:
     usage: /<command>
 
 permissions:
-  royalirc.*:
+  dragonirc.*:
     description: Grants all permissions.
     default: false
     children:
-      royalirc.royalirc: true
-      royalirc.ircmessage: true
-      royalirc.irckick: true
-      royalirc.ircrestartbots: true
-  royalirc.royalirc:
-    description: Allows /royalirc.
+      dragonirc.dragonirc: true
+      dragonirc.ircmessage: true
+      dragonirc.irckick: true
+      dragonirc.ircrestartbots: true
+  dragonirc.dragonirc:
+    description: Allows /dragonirc.
     default: op
-  royalirc.ircmessage:
+  dragonirc.ircmessage:
     description: Allows /ircmessage.
     default: op
-  royalirc.irckick:
+  dragonirc.irckick:
     description: Allows /irckick.
     default: op
-  royalirc.ircrestartbots:
+  dragonirc.ircrestartbots:
     description: Allows /ircrestartbots.
     default: op
