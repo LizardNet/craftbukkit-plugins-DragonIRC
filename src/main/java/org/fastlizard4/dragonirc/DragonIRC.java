@@ -39,8 +39,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pircbotx.Colors;
 
-import org.fastlizard4.dragonirc.bukkitlistener.BChatListener;
-import org.fastlizard4.dragonirc.bukkitlistener.BServerListener;
 import org.fastlizard4.dragonirc.commands.CmdIRCKick;
 import org.fastlizard4.dragonirc.commands.CmdIRCMessage;
 import org.fastlizard4.dragonirc.commands.CmdIRCRestartBots;
@@ -80,8 +78,7 @@ public class DragonIRC extends JavaPlugin {
         bh.createBots();
 
         final PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new BChatListener(this), this);
-        pm.registerEvents(new BServerListener(this), this);
+        pm.registerEvents(new BukkitListener(this), this);
 
         getCommand("dragonirc").setExecutor(new CmdDragonIRC(this));
         getCommand("ircmessage").setExecutor(new CmdIRCMessage(this));
