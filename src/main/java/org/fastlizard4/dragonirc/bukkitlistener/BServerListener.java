@@ -1,13 +1,13 @@
 /**
  * DRAGONIRC
- * by Andrew "FastLizard4" Adams, TLUL, and the LizardNet CraftBukkit Plugins
- * Development Team (see AUTHORS.txt file)
+ * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
+ * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
  *
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, TLUL, and the LizardNet
- * CraftBukkit Plugins Development Team. Some rights reserved.
+ * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * LizardNet CraftBukkit Plugins Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
  * <http://gnu.org/licenses/gpl.html>. This is free software: you are free to
