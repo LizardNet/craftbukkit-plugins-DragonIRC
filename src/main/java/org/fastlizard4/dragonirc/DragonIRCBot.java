@@ -36,20 +36,21 @@ package org.fastlizard4.dragonirc;
 import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
+import org.pircbotx.delay.StaticDelay;
 import org.pircbotx.hooks.managers.ListenerManager;
 
 public class DragonIRCBot {
 
     final private PircBotX bot;
 
-    public DragonIRCBot(final DragonIRC plugin, ConfigurationSection cs, ListenerManager<PircBotX> lm) {
+    public DragonIRCBot(final DragonIRC plugin, ConfigurationSection cs, ListenerManager lm) {
         final String hostname = cs.getString("hostname");
         final int port = cs.getInt("port", 6667);
         final String password = cs.getString("server_password", "");
-        Configuration.Builder<PircBotX> cb = new Configuration.Builder<>();
+        Configuration.Builder cb = new Configuration.Builder();
         cb.setServer(hostname, port)
                 .setAutoNickChange(true)
-                .setMessageDelay(cs.getLong("message_delay", 1000L))
+                .setMessageDelay(new StaticDelay(cs.getLong("message_delay", 1000L)))
                 .setName(cs.getString("nick", "DragonIRCBot"))
                 .setFinger(cs.getString("finger", "DragonIRC Link"))
                 .setLogin(cs.getString("login", "DragonIRC"))
