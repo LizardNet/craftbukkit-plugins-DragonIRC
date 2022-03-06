@@ -59,6 +59,17 @@ public class DragonIRC extends JavaPlugin {
     }
 
     public void sendToMinecraft(String s) {
+        getServer().getScheduler().runTask(this, () -> doSendToMinecraft(s));
+    }
+
+    /**
+     * Wrapper to call {@link org.bukkit.Bukkit#broadcastMessage(String)} from
+     * the main thread. It cannot safely be called asynchronously, because it
+     * broadcasts the message to command blocks, which could update their data
+     * values, which must happen on the main thread. Yes, really.
+     * @see https://github.com/PaperMC/Paper/issues/7511
+     */
+    private void doSendToMinecraft(String s) {
         if (Config.allowColors) s = RUtils.ircColorsToMinecraftColors(s);
         else s = Colors.removeFormattingAndColors(s);
         getServer().broadcastMessage(s);
