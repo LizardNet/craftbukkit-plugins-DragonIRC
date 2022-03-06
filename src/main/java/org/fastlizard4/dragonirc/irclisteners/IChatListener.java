@@ -64,7 +64,7 @@ public class IChatListener extends ListenerAdapter {
     }
 
     private String replaceVarsGeneric(Event e, String s) {
-        s = s.replace("{server}", e.getBot().getConfiguration().getServerHostname());
+        s = s.replace("{server}", e.getBot().getServerHostname());
         s = s.replace("{botname}", e.getBot().getNick());
         return s;
     }

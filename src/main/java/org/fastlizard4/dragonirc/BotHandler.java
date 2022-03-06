@@ -62,7 +62,7 @@ public class BotHandler {
 
     private final DragonIRC plugin;
     private final List<DragonIRCBot> bots = new ArrayList<>();
-    private final ListenerManager<PircBotX> lm = new ThreadedListenerManager<>();
+    private final ListenerManager lm = new ThreadedListenerManager();
 
     public BotHandler(DragonIRC instance) {
         plugin = instance;
@@ -162,7 +162,7 @@ public class BotHandler {
 
     public DragonIRCBot getBotByServer(String server) {
         for (DragonIRCBot rib : bots) {
-            if (!rib.getBackend().getConfiguration().getServerHostname().equalsIgnoreCase(server)) continue;
+            if (!rib.getBackend().getServerHostname().equalsIgnoreCase(server)) continue;
             return rib;
         }
         return null;
