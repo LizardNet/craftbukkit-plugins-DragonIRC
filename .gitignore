@@ -32,3 +32,6 @@ package
 *.ipr
 *.iws
 .idea/
+
+# VS code
+.vscode/
