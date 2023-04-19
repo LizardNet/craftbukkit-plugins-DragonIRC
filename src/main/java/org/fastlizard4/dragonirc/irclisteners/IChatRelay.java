@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -43,8 +43,8 @@ import org.pircbotx.hooks.events.PartEvent;
 import org.pircbotx.hooks.events.QuitEvent;
 
 import org.fastlizard4.dragonirc.Config;
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class IChatRelay extends ListenerAdapter {
 
@@ -56,9 +56,15 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onMessage(MessageEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
-        if (RUtils.isFantasyCommand(e.getMessage())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
+        if (RUtils.isFantasyCommand(e.getMessage())) {
+            return;
+        }
         String message = Config.itiMessage;
         message = message.replace("{server}", e.getBot().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
@@ -69,8 +75,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onAction(ActionEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiAction;
         message = message.replace("{server}", e.getBot().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
@@ -81,8 +91,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onJoin(JoinEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiJoin;
         message = message.replace("{server}", e.getBot().getServerHostname());
         message = message.replace("{name}", e.getUser().getNick());
@@ -92,8 +106,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onKick(KickEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getRecipient().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getRecipient().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiKick;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServerHostname());
@@ -106,8 +124,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onPart(PartEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiPart;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServerHostname());
@@ -119,8 +141,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onQuit(QuitEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiQuit;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{server}", e.getBot().getServerHostname());
@@ -131,8 +157,12 @@ public class IChatRelay extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent e) {
-        if (!Config.linkChannels) return;
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (!Config.linkChannels) {
+            return;
+        }
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itiNick;
         message = message.replace("{server}", e.getBot().getServerHostname());
         message = message.replace("{name}", e.getOldNick());

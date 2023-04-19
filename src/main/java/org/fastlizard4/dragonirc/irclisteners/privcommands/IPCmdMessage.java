@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -42,8 +42,8 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import org.fastlizard4.dragonirc.Config;
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class IPCmdMessage extends ListenerAdapter {
 
@@ -55,10 +55,12 @@ public class IPCmdMessage extends ListenerAdapter {
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent e) {
-        if (!e.getMessage().trim().split(" ")[0].equalsIgnoreCase("message")) return;
+        if (!e.getMessage().trim().split(" ")[0].equalsIgnoreCase("message")) {
+            return;
+        }
         final User u = e.getUser();
         String[] args = e.getMessage().split(" ");
-        args = (String[]) ArrayUtils.subarray(args, 1, args.length);
+        args = ArrayUtils.subarray(args, 1, args.length);
         if (args.length < 2) {
             e.respond("Usage: message [name] [message]");
             return;
@@ -70,8 +72,11 @@ public class IPCmdMessage extends ListenerAdapter {
             e.respond("No such player.");
             return;
         }
-        if (Config.allowColors) message = RUtils.ircColorsToMinecraftColors(message);
-        else message = Colors.removeFormattingAndColors(message);
+        if (Config.allowColors) {
+            message = RUtils.ircColorsToMinecraftColors(message);
+        } else {
+            message = Colors.removeFormattingAndColors(message);
+        }
         String send = Config.ituMessage;
         send = send.replace("{server}", e.getBot().getServerInfo().getServerName());
         send = send.replace("{name}", u.getNick());

@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -41,9 +41,9 @@ import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
 import org.fastlizard4.dragonirc.Config;
+import org.fastlizard4.dragonirc.DragonIRC;
 import org.fastlizard4.dragonirc.PermissionHandler;
 import org.fastlizard4.dragonirc.RUtils;
-import org.fastlizard4.dragonirc.DragonIRC;
 
 public class ICmdKick extends ListenerAdapter {
 
@@ -55,22 +55,27 @@ public class ICmdKick extends ListenerAdapter {
 
     @Override
     public void onMessage(MessageEvent e) {
-        if (!RUtils.isFantasyCommand(e.getMessage())) return;
+        if (!RUtils.isFantasyCommand(e.getMessage())) {
+            return;
+        }
         final String command = RUtils.getFantasyCommand(e.getMessage());
-        if (!command.equalsIgnoreCase("kick")) return;
+        if (!command.equalsIgnoreCase("kick")) {
+            return;
+        }
         final User u = e.getUser();
         if (!PermissionHandler.atLeastMod(u.getNick()) || !PermissionHandler.atLeastHalfOp(u, e.getChannel())) {
             e.respond("You do not have permission for that.");
             return;
         }
         String[] args = e.getMessage().split(" ");
-        args = (String[]) ArrayUtils.subarray(args, 1, args.length);
+        args = ArrayUtils.subarray(args, 1, args.length);
         if (args.length < 1) {
             e.respond("Usage: " + Config.fantasyChar + "kick [player] (reason)");
             return;
         }
         final String toKick = args[0];
-        final String reason = (args.length > 1) ? StringUtils.join(args, " ", 1, args.length) : "Kicked by " + u.getNick();
+        final String reason =
+                (args.length > 1) ? StringUtils.join(args, " ", 1, args.length) : "Kicked by " + u.getNick();
         final Player p = plugin.getServer().getPlayer(toKick);
         if (p == null) {
             e.respond("No such player.");

@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -41,9 +41,9 @@ import org.bukkit.command.CommandSender;
 import org.pircbotx.User;
 
 import org.fastlizard4.dragonirc.Config;
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
 import org.fastlizard4.dragonirc.DragonIRCBot;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class CmdIRCMessage implements CommandExecutor {
 
@@ -84,9 +84,14 @@ public class CmdIRCMessage implements CommandExecutor {
             String send = Config.btuMessage;
             send = send.replace("{name}", cs.getName());
             send = send.replace("{message}", message);
-            if (Config.parseMinecraftColors) message = ChatColor.translateAlternateColorCodes('&', message);
-            if (Config.allowColors) message = RUtils.minecraftColorstoIRCColors(message);
-            else message = ChatColor.stripColor(message);
+            if (Config.parseMinecraftColors) {
+                message = ChatColor.translateAlternateColorCodes('&', message);
+            }
+            if (Config.allowColors) {
+                message = RUtils.minecraftColorstoIRCColors(message);
+            } else {
+                message = ChatColor.stripColor(message);
+            }
             u.send().message(send);
             String confirm = Config.btuConfirm;
             confirm = confirm.replace("{name}", cs.getName());

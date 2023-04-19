@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -39,8 +39,8 @@ import org.bukkit.entity.Player;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;
 
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class ICmdPlayers extends ListenerAdapter {
 
@@ -52,9 +52,13 @@ public class ICmdPlayers extends ListenerAdapter {
 
     @Override
     public void onMessage(MessageEvent e) {
-        if (!RUtils.isFantasyCommand(e.getMessage())) return;
+        if (!RUtils.isFantasyCommand(e.getMessage())) {
+            return;
+        }
         final String command = RUtils.getFantasyCommand(e.getMessage());
-        if (!command.equalsIgnoreCase("players")) return;
+        if (!command.equalsIgnoreCase("players")) {
+            return;
+        }
         Collection<? extends Player> online = plugin.getServer().getOnlinePlayers();
         StringBuilder sb = new StringBuilder("Players (%s/%s): ");
         for (Player p : online) {
@@ -63,7 +67,9 @@ public class ICmdPlayers extends ListenerAdapter {
         }
         int visible = online.size();
         String toSend = String.format(sb.toString(), visible, plugin.getServer().getMaxPlayers());
-        if (visible > 0) toSend = toSend.substring(0, toSend.length() - 2);
+        if (visible > 0) {
+            toSend = toSend.substring(0, toSend.length() - 2);
+        }
         e.respond(toSend);
     }
 }

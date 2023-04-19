@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -39,20 +39,21 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.pircbotx.Colors;
 
+import org.fastlizard4.dragonirc.commands.CmdDragonIRC;
 import org.fastlizard4.dragonirc.commands.CmdIRCKick;
 import org.fastlizard4.dragonirc.commands.CmdIRCMessage;
 import org.fastlizard4.dragonirc.commands.CmdIRCRestartBots;
-import org.fastlizard4.dragonirc.commands.CmdDragonIRC;
 
 public class DragonIRC extends JavaPlugin {
-
-    public Config c;
-    public BotHandler bh = null;
 
     public static DragonIRC instance;
     public static String version;
 
-    private final Pattern versionPattern = Pattern.compile("(\\d+\\.\\d+\\.\\d+)(\\-SNAPSHOT)?(\\-local\\-(\\d{8}\\.\\d{6})|\\-(\\d+))?");
+    private final Pattern versionPattern = Pattern.compile(
+            "(\\d+\\.\\d+\\.\\d+)(\\-SNAPSHOT)?(\\-local\\-(\\d{8}\\.\\d{6})|\\-(\\d+))?");
+
+    public Config c;
+    public BotHandler bh = null;
 
     public boolean vanishLoaded() {
         return getServer().getPluginManager().getPlugin("VanishNoPacket") != null;
@@ -63,15 +64,18 @@ public class DragonIRC extends JavaPlugin {
     }
 
     /**
-     * Wrapper to call {@link org.bukkit.Bukkit#broadcastMessage(String)} from
-     * the main thread. It cannot safely be called asynchronously, because it
-     * broadcasts the message to command blocks, which could update their data
-     * values, which must happen on the main thread. Yes, really.
-     * @see https://github.com/PaperMC/Paper/issues/7511
+     * Wrapper to call {@link org.bukkit.Bukkit#broadcastMessage(String)} from the main thread. It cannot safely be
+     * called asynchronously, because it broadcasts the message to command blocks, which could update their data values,
+     * which must happen on the main thread. Yes, really.
+     *
+     * @see <a href="https://github.com/PaperMC/Paper/issues/7511">Paper #7511</a>
      */
     private void doSendToMinecraft(String s) {
-        if (Config.allowColors) s = RUtils.ircColorsToMinecraftColors(s);
-        else s = Colors.removeFormattingAndColors(s);
+        if (Config.allowColors) {
+            s = RUtils.ircColorsToMinecraftColors(s);
+        } else {
+            s = Colors.removeFormattingAndColors(s);
+        }
         getServer().broadcastMessage(s);
     }
 
@@ -129,7 +133,9 @@ public class DragonIRC extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        if (bh != null) bh.disconnect();
+        if (bh != null) {
+            bh.disconnect();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -48,7 +48,7 @@ public class DragonIRCBot {
         final int port = cs.getInt("port", 6667);
         final String password = cs.getString("server_password", "");
         Configuration.Builder cb = new Configuration.Builder();
-        cb.setServer(hostname, port)
+        cb.addServer(hostname, port)
                 .setAutoNickChange(true)
                 .setMessageDelay(new StaticDelay(cs.getLong("message_delay", 1000L)))
                 .setName(cs.getString("nick", "DragonIRCBot"))
@@ -56,12 +56,19 @@ public class DragonIRCBot {
                 .setLogin(cs.getString("login", "DragonIRC"))
                 .setVersion("DragonIRC" + DragonIRC.version)
                 .setListenerManager(lm);
-        if (!password.isEmpty()) cb.setServerPassword(password);
-        if (cs.getString("auth").equalsIgnoreCase("NickServ")) cb.setNickservPassword(cs.getString("auth_password"));
+        if (!password.isEmpty()) {
+            cb.setServerPassword(password);
+        }
+        if (cs.getString("auth").equalsIgnoreCase("NickServ")) {
+            cb.setNickservPassword(cs.getString("auth_password"));
+        }
         for (String channel : cs.getStringList("channels")) {
             String[] parts = channel.trim().split(" ");
-            if (parts.length > 1) cb.addAutoJoinChannel(parts[0], parts[1]);
-            else cb.addAutoJoinChannel(parts[0]);
+            if (parts.length > 1) {
+                cb.addAutoJoinChannel(parts[0], parts[1]);
+            } else {
+                cb.addAutoJoinChannel(parts[0]);
+            }
         }
         bot = new PircBotX(cb.buildConfiguration());
         plugin.getLogger().info("Attempting to connect to " + hostname + ":" + port + "...");
