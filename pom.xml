@@ -44,11 +44,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.wlritchi</groupId>
             <artifactId>pircbotx</artifactId>
             <version>2.3.0-wlritchi1</version>
@@ -57,6 +52,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -67,8 +67,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <!-- modern Java still isn't supported by 3.2.x, and 3.3.x isn't released yet -->
-                <version>3.3.0-SNAPSHOT</version>
+                <version>3.4.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -115,7 +114,7 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-    <pluginRepositories>
+    <!-- <pluginRepositories> Currently not needed, but keeping around in case we do again in the future
         <pluginRepository>
             <id>apache-dev</id>
             <name>Apache Dev</name>
@@ -124,5 +123,5 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories> -->
 </project>

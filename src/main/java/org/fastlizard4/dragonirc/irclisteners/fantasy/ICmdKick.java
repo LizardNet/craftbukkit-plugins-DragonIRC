@@ -33,8 +33,8 @@
 
 package org.fastlizard4.dragonirc.irclisteners.fantasy;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.entity.Player;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;

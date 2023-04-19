@@ -33,7 +33,7 @@
 
 package org.fastlizard4.dragonirc.irclisteners.privcommands;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.pircbotx.Channel;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
