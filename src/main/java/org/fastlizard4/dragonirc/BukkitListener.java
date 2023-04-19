@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -42,7 +42,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;

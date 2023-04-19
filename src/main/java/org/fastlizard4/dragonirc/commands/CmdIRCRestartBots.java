@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -37,8 +37,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class CmdIRCRestartBots implements CommandExecutor {
 

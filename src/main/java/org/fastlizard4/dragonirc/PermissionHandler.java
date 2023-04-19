@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -33,11 +33,11 @@
 
 package org.fastlizard4.dragonirc;
 
-import org.pircbotx.Channel;
-import org.pircbotx.User;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.pircbotx.Channel;
+import org.pircbotx.User;
 
 public class PermissionHandler {
 
@@ -53,8 +53,11 @@ public class PermissionHandler {
     public static void setAuthenticated(String name, String server, boolean isAuthed) {
         final String entry = name + ":" + server.toLowerCase();
         synchronized (authed) {
-            if (!isAuthed) authed.remove(entry);
-            else authed.add(entry);
+            if (!isAuthed) {
+                authed.remove(entry);
+            } else {
+                authed.add(entry);
+            }
         }
     }
 

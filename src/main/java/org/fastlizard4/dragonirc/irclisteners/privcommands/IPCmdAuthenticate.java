@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -33,18 +33,18 @@
 
 package org.fastlizard4.dragonirc.irclisteners.privcommands;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.pircbotx.User;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.PrivateMessageEvent;
 
+import org.fastlizard4.dragonirc.DragonIRC;
 import org.fastlizard4.dragonirc.PermissionHandler;
 import org.fastlizard4.dragonirc.RUtils;
-import org.fastlizard4.dragonirc.DragonIRC;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class IPCmdAuthenticate extends ListenerAdapter {
 
@@ -57,23 +57,27 @@ public class IPCmdAuthenticate extends ListenerAdapter {
     private String hash(String data) throws NoSuchAlgorithmException {
         final MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(data.getBytes());
-        byte byteData[] = md.digest();
+        byte[] byteData = md.digest();
         StringBuilder sb = new StringBuilder();
-        for (byte aByteData : byteData) sb.append(Integer.toString((aByteData & 0xff) + 0x100, 16).substring(1));
+        for (byte aByteData : byteData) {
+            sb.append(Integer.toString((aByteData & 0xff) + 0x100, 16).substring(1));
+        }
         return sb.toString();
     }
 
     @Override
     public void onPrivateMessage(PrivateMessageEvent e) {
         final String command = RUtils.getFirstWord(e.getMessage());
-        if (!command.equalsIgnoreCase("authenticate")) return;
+        if (!command.equalsIgnoreCase("authenticate")) {
+            return;
+        }
         final User u = e.getUser();
         if (!PermissionHandler.atLeastMod(u.getNick())) {
             e.respond("You are not allowed to do this.");
             return;
         }
         String[] args = e.getMessage().split(" ");
-        args = (String[]) ArrayUtils.subarray(args, 1, args.length);
+        args = ArrayUtils.subarray(args, 1, args.length);
         if (args.length < 1) {
             e.respond("Usage: authenticate [key]");
             return;

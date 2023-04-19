@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -42,10 +42,10 @@ import org.pircbotx.Channel;
 import org.pircbotx.User;
 
 import org.fastlizard4.dragonirc.Config;
-import org.fastlizard4.dragonirc.PermissionHandler;
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
 import org.fastlizard4.dragonirc.DragonIRCBot;
+import org.fastlizard4.dragonirc.PermissionHandler;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class CmdIRCKick implements CommandExecutor {
 
@@ -77,7 +77,9 @@ public class CmdIRCKick implements CommandExecutor {
             }
             Channel c = null;
             for (Channel ch : rib.getBackend().getUserBot().getChannels()) {
-                if (!ch.getName().equalsIgnoreCase(channel)) continue;
+                if (!ch.getName().equalsIgnoreCase(channel)) {
+                    continue;
+                }
                 c = ch;
                 break;
             }
@@ -90,10 +92,14 @@ public class CmdIRCKick implements CommandExecutor {
                 cs.sendMessage(ChatColor.RED + "User not in that channel!");
                 return true;
             }
-            if (!PermissionHandler.atLeastOp(rib.getBackend().getUserBot(), c))
+            if (!PermissionHandler.atLeastOp(rib.getBackend().getUserBot(), c)) {
                 cs.sendMessage(ChatColor.RED + "Not chanop in that channel; still trying kick.");
+            }
             c.send().kick(u, cs.getName() + ": " + reason);
-            cs.sendMessage(ChatColor.BLUE + "Attempted to kick " + ChatColor.GRAY + u.getNick() + ChatColor.BLUE + " from " + ChatColor.GRAY + c.getName() + ChatColor.BLUE + " for " + ChatColor.GRAY + reason + ChatColor.BLUE + ".");
+            cs.sendMessage(
+                    ChatColor.BLUE + "Attempted to kick " + ChatColor.GRAY + u.getNick() + ChatColor.BLUE + " from "
+                            + ChatColor.GRAY + c.getName() + ChatColor.BLUE + " for " + ChatColor.GRAY + reason
+                            + ChatColor.BLUE + ".");
             return true;
         }
         return false;

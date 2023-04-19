@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -42,8 +42,12 @@ public class IKickListener extends ListenerAdapter {
 
     @Override
     public void onKick(KickEvent e) {
-        if (!Config.rejoinOnKick) return;
-        if (!e.getRecipient().getNick().equalsIgnoreCase(e.getBot().getNick())) return;
+        if (!Config.rejoinOnKick) {
+            return;
+        }
+        if (!e.getRecipient().getNick().equalsIgnoreCase(e.getBot().getNick())) {
+            return;
+        }
         try {
             Thread.sleep(Config.rejoinWaitTime * 1000L);
         } catch (InterruptedException ignored) {

@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -45,7 +45,8 @@ import org.pircbotx.Channel;
 import org.pircbotx.Colors;
 
 public class RUtils {
-    private static final List<String> fantasyCommands = new ArrayList<String>() {
+
+    private static final List<String> fantasyCommands = new ArrayList<>() {
         {
             add("players");
             add("kick");
@@ -54,7 +55,8 @@ public class RUtils {
 
     public static boolean isFantasyCommand(String message) {
         final String firstWord = getFirstWord(message);
-        return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(firstWord.substring(1));
+        return firstWord.startsWith(String.valueOf(Config.fantasyChar)) && fantasyCommands.contains(
+                firstWord.substring(1));
     }
 
     public static String getFantasyCommand(String message) {
@@ -70,7 +72,9 @@ public class RUtils {
     }
 
     public static String colorize(String s) {
-        if (s == null) return null;
+        if (s == null) {
+            return null;
+        }
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
@@ -79,13 +83,16 @@ public class RUtils {
     }
 
     public static boolean sameChannels(Channel a, Channel b) {
-        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServerInfo().getServerName().equalsIgnoreCase(b.getBot().getServerInfo().getServerName());
+        return a.getName().equalsIgnoreCase(b.getName()) && a.getBot().getServerInfo().getServerName()
+                .equalsIgnoreCase(b.getBot().getServerInfo().getServerName());
     }
 
     public static boolean containsChannel(Collection<Channel> cs, Channel lookFor) {
         for (Channel c : cs) {
-            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServerInfo().getServerName().equalsIgnoreCase(lookFor.getBot().getServerInfo().getServerName()))
+            if (!c.getName().equalsIgnoreCase(lookFor.getName()) || !c.getBot().getServerInfo().getServerName()
+                    .equalsIgnoreCase(lookFor.getBot().getServerInfo().getServerName())) {
                 continue;
+            }
             return true;
         }
         return false;

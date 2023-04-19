@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -33,20 +33,62 @@
 
 package org.fastlizard4.dragonirc;
 
-import org.bukkit.configuration.file.FileConfiguration;
-
 import java.io.File;
 import java.util.List;
 
+import org.bukkit.configuration.file.FileConfiguration;
+
 public class Config {
 
+    public static String itbMessage;
+    public static String itbAction;
+    public static String itbJoin;
+    public static String itbPart;
+    public static String itbQuit;
+    public static String itbKick;
+    public static String itbNick;
+    public static String btiMessage;
+    public static String btiAction;
+    public static String btiLogin;
+    public static String btiQuit;
+    public static String btiKick;
+    public static String btiSay;
+    public static String btiDeath;
+    public static String itiMessage;
+    public static String itiAction;
+    public static String itiJoin;
+    public static String itiPart;
+    public static String itiQuit;
+    public static String itiKick;
+    public static String itiNick;
+    public static String btuMessage;
+    public static String btuConfirm;
+    public static String ituMessage;
+    public static String defaultReason;
+    public static List<String> actionAliases;
+    public static List<String> admins;
+    public static List<String> sayAliases;
+    public static List<String> mods;
+    public static char commentChar;
+    public static char fantasyChar;
+    public static boolean linkChannels;
+    public static boolean allowColors;
+    public static boolean parseMinecraftColors;
+    public static boolean parseIRCToMinecraftColors;
+    public static boolean defaultConfig;
+    public static boolean rejoinOnKick;
+    public static boolean useSyncChat;
+    public static boolean reportPlayerDeaths;
+    public static int rejoinWaitTime;
     private final DragonIRC plugin;
 
     public Config(DragonIRC instance) {
         plugin = instance;
         File config = new File(plugin.getDataFolder(), "config.yml");
         if (!config.exists()) {
-            if (!config.getParentFile().mkdirs()) plugin.getLogger().warning("Could not create config.yml directory.");
+            if (!config.getParentFile().mkdirs()) {
+                plugin.getLogger().warning("Could not create config.yml directory.");
+            }
             plugin.saveDefaultConfig();
         }
         reloadConfiguration();
@@ -106,56 +148,6 @@ public class Config {
 
         rejoinWaitTime = c.getInt("settings.on_kick.time");
     }
-
-    public static String itbMessage;
-    public static String itbAction;
-    public static String itbJoin;
-    public static String itbPart;
-    public static String itbQuit;
-    public static String itbKick;
-    public static String itbNick;
-
-    public static String btiMessage;
-    public static String btiAction;
-    public static String btiLogin;
-    public static String btiQuit;
-    public static String btiKick;
-    public static String btiSay;
-    public static String btiDeath;
-
-    public static String itiMessage;
-    public static String itiAction;
-    public static String itiJoin;
-    public static String itiPart;
-    public static String itiQuit;
-    public static String itiKick;
-    public static String itiNick;
-
-    public static String btuMessage;
-    public static String btuConfirm;
-
-    public static String ituMessage;
-
-    public static String defaultReason;
-
-    public static List<String> actionAliases;
-    public static List<String> admins;
-    public static List<String> sayAliases;
-    public static List<String> mods;
-
-    public static char commentChar;
-    public static char fantasyChar;
-
-    public static boolean linkChannels;
-    public static boolean allowColors;
-    public static boolean parseMinecraftColors;
-    public static boolean parseIRCToMinecraftColors;
-    public static boolean defaultConfig;
-    public static boolean rejoinOnKick;
-    public static boolean useSyncChat;
-    public static boolean reportPlayerDeaths;
-
-    public static int rejoinWaitTime;
 
 }
 

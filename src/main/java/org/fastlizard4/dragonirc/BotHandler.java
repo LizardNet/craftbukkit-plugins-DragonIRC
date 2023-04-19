@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -33,14 +33,17 @@
 
 package org.fastlizard4.dragonirc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Channel;
-import org.pircbotx.PircBotX;
 import org.pircbotx.User;
 import org.pircbotx.hooks.Listener;
 import org.pircbotx.hooks.managers.ListenerManager;
 import org.pircbotx.hooks.managers.ThreadedListenerManager;
+
 import org.fastlizard4.dragonirc.irclisteners.IChatListener;
 import org.fastlizard4.dragonirc.irclisteners.IChatRelay;
 import org.fastlizard4.dragonirc.irclisteners.IKickListener;
@@ -55,9 +58,6 @@ import org.fastlizard4.dragonirc.irclisteners.privcommands.IPCmdPart;
 import org.fastlizard4.dragonirc.irclisteners.privcommands.IPCmdPrivmsg;
 import org.fastlizard4.dragonirc.irclisteners.privcommands.IPCmdRaw;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BotHandler {
 
     private final DragonIRC plugin;
@@ -69,9 +69,14 @@ public class BotHandler {
     }
 
     private String convertMessages(String s) {
-        if (Config.parseMinecraftColors) s = ChatColor.translateAlternateColorCodes('&', s);
-        if (Config.allowColors) s = RUtils.minecraftColorstoIRCColors(s);
-        else s = ChatColor.stripColor(s);
+        if (Config.parseMinecraftColors) {
+            s = ChatColor.translateAlternateColorCodes('&', s);
+        }
+        if (Config.allowColors) {
+            s = RUtils.minecraftColorstoIRCColors(s);
+        } else {
+            s = ChatColor.stripColor(s);
+        }
         return s;
     }
 
@@ -106,7 +111,9 @@ public class BotHandler {
         message = convertMessages(message);
         synchronized (bots) {
             for (DragonIRCBot bot : bots) {
-                for (Channel c : bot.getBackend().getUserBot().getChannels()) c.send().message(message);
+                for (Channel c : bot.getBackend().getUserBot().getChannels()) {
+                    c.send().message(message);
+                }
             }
         }
     }
@@ -121,7 +128,9 @@ public class BotHandler {
         synchronized (bots) {
             for (DragonIRCBot bot : bots) {
                 for (Channel c : bot.getBackend().getUserBot().getChannels()) {
-                    if (RUtils.sameChannels(dontSendTo, c)) continue;
+                    if (RUtils.sameChannels(dontSendTo, c)) {
+                        continue;
+                    }
                     c.send().message(message);
                 }
             }
@@ -132,7 +141,9 @@ public class BotHandler {
         message = convertMessages(message);
         synchronized (bots) {
             for (DragonIRCBot bot : bots) {
-                if (bot.getBackend().getServerInfo().getServerName().equals(dontSendTo)) continue;
+                if (bot.getBackend().getServerInfo().getServerName().equals(dontSendTo)) {
+                    continue;
+                }
                 for (Channel c : bot.getBackend().getUserBot().getChannels()) {
                     c.send().message(message);
                 }
@@ -152,8 +163,10 @@ public class BotHandler {
     }
 
     public void clearListenerManager() {
-        final Listener[] ls = lm.getListeners().toArray(new Listener[lm.getListeners().size()]);
-        for (Listener l : ls) lm.removeListener(l);
+        final Listener[] ls = lm.getListeners().toArray(new Listener[0]);
+        for (Listener l : ls) {
+            lm.removeListener(l);
+        }
     }
 
     public List<DragonIRCBot> getBots() {
@@ -162,7 +175,9 @@ public class BotHandler {
 
     public DragonIRCBot getBotByServer(String server) {
         for (DragonIRCBot rib : bots) {
-            if (!rib.getBackend().getServerHostname().equalsIgnoreCase(server)) continue;
+            if (!rib.getBackend().getServerHostname().equalsIgnoreCase(server)) {
+                continue;
+            }
             return rib;
         }
         return null;
@@ -171,7 +186,9 @@ public class BotHandler {
     public boolean userInChannels(User u) {
         for (Channel uC : u.getChannels()) {
             for (Channel bC : u.getBot().getUserBot().getChannels()) {
-                if (!uC.getName().equalsIgnoreCase(bC.getName())) continue;
+                if (!uC.getName().equalsIgnoreCase(bC.getName())) {
+                    continue;
+                }
                 return true;
             }
         }

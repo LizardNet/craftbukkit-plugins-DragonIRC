@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -46,8 +46,8 @@ import org.pircbotx.hooks.events.QuitEvent;
 import org.pircbotx.hooks.types.GenericMessageEvent;
 
 import org.fastlizard4.dragonirc.Config;
-import org.fastlizard4.dragonirc.RUtils;
 import org.fastlizard4.dragonirc.DragonIRC;
+import org.fastlizard4.dragonirc.RUtils;
 
 public class IChatListener extends ListenerAdapter {
 
@@ -70,15 +70,23 @@ public class IChatListener extends ListenerAdapter {
     }
 
     private String parseColors(String s) {
-        if (!Config.parseIRCToMinecraftColors) return s;
+        if (!Config.parseIRCToMinecraftColors) {
+            return s;
+        }
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
     @Override
     public void onMessage(MessageEvent e) {
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
-        if (e.getMessage().trim().startsWith(String.valueOf(Config.commentChar))) return;
-        if (RUtils.isFantasyCommand(e.getMessage())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
+        if (e.getMessage().trim().startsWith(String.valueOf(Config.commentChar))) {
+            return;
+        }
+        if (RUtils.isFantasyCommand(e.getMessage())) {
+            return;
+        }
         String message = Config.itbMessage;
         message = replaceVars(e, message);
         message = message.replace("{channel}", e.getChannel().getName());
@@ -89,7 +97,9 @@ public class IChatListener extends ListenerAdapter {
 
     @Override
     public void onAction(ActionEvent e) {
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itbAction;
         message = replaceVars(e, message);
         message = message.replace("{channel}", e.getChannel().getName());
@@ -99,7 +109,9 @@ public class IChatListener extends ListenerAdapter {
 
     @Override
     public void onJoin(JoinEvent e) {
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itbJoin;
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{channel}", e.getChannel().getName());
@@ -109,7 +121,9 @@ public class IChatListener extends ListenerAdapter {
 
     @Override
     public void onPart(PartEvent e) {
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itbPart;
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
         message = message.replace("{name}", e.getUser().getNick());
@@ -134,7 +148,9 @@ public class IChatListener extends ListenerAdapter {
     @Override
     public void onQuit(QuitEvent e) {
         final String reason = (e.getReason().isEmpty()) ? Config.defaultReason : e.getReason();
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itbQuit;
         message = message.replace("{name}", e.getUser().getNick());
         message = message.replace("{message}", reason);
@@ -144,7 +160,9 @@ public class IChatListener extends ListenerAdapter {
 
     @Override
     public void onNickChange(NickChangeEvent e) {
-        if (e.getUser().getNick().equals(e.getBot().getNick())) return;
+        if (e.getUser().getNick().equals(e.getBot().getNick())) {
+            return;
+        }
         String message = Config.itbNick;
         message = message.replace("{name}", e.getOldNick());
         message = message.replace("{newname}", e.getNewNick());

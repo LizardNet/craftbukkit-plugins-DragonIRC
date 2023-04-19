@@ -1,4 +1,4 @@
-/**
+/*
  * DRAGONIRC
  * by Andrew "FastLizard4" Adams, William Luc Ritchie, and the LizardNet
  * CraftBukkit Plugins Development Team (see AUTHORS.txt file)
@@ -6,7 +6,7 @@
  * BASED UPON:
  * RoyalIRC by RoyalDev, <https://github.com/RoyalDev/RoyalIRC>, GPL v3
  *
- * Copyright (C) 2015 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
+ * Copyright (C) 2015-2023 by Andrew "FastLizard4" Adams, William Luc Ritchie, and the
  * LizardNet Development Team. Some rights reserved.
  *
  * License GPLv3+: GNU General Public License version 3 or later (at your choice):
@@ -47,14 +47,16 @@ public class IPCmdRaw extends ListenerAdapter {
     @Override
     public void onPrivateMessage(PrivateMessageEvent e) {
         final String command = RUtils.getFirstWord(e.getMessage());
-        if (!command.equalsIgnoreCase("raw")) return;
+        if (!command.equalsIgnoreCase("raw")) {
+            return;
+        }
         final User u = e.getUser();
         if (!PermissionHandler.isAuthedOrAdmin(u.getNick(), u.getServer())) {
             e.respond("You are not allowed to do this.");
             return;
         }
         String[] args = e.getMessage().trim().split(" ");
-        args = (String[]) ArrayUtils.subarray(args, 1, args.length);
+        args = ArrayUtils.subarray(args, 1, args.length);
         if (args.length < 1) {
             e.respond("Usage: raw [command]");
             return;
