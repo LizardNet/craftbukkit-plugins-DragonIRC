@@ -80,11 +80,9 @@ public class BukkitListener implements Listener {
             return;
         }
 
-        boolean isAction = false;
-        boolean isSpeak = false;
         String command = e.getMessage();
         Stream.concat(Config.actionAliases.stream(), Config.sayAliases.stream())
-                .filter(s -> command.startsWith(s.substring(1)))
+                .filter(command::startsWith)
                 .findFirst()
                 .ifPresent(s -> {
                     String format = Config.actionAliases.contains(s) ? Config.btiAction : Config.btiSay;
@@ -119,15 +117,13 @@ public class BukkitListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onServerCommand(ServerCommandEvent e) {
-        boolean isAction = false;
-        boolean isSpeak = false;
         String command = e.getCommand();
         Stream.concat(Config.actionAliases.stream(), Config.sayAliases.stream())
                 .filter(s -> command.startsWith(s.substring(1)))
                 .findFirst()
                 .ifPresent(s -> {
                     String format = Config.actionAliases.contains(s) ? Config.btiAction : Config.btiSay;
-                    sendMessage(format, e.getSender().getName(), command.substring(s.length()));
+                    sendMessage(format, e.getSender().getName(), command.substring(s.length() - 1));
                 });
     }
 
