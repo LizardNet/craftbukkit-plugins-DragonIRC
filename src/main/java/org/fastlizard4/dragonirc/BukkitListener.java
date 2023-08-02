@@ -35,11 +35,13 @@ package org.fastlizard4.dragonirc;
 
 import java.util.stream.Stream;
 
+import org.bukkit.advancement.AdvancementDisplay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -125,6 +127,23 @@ public class BukkitListener implements Listener {
                     String format = Config.actionAliases.contains(s) ? Config.btiAction : Config.btiSay;
                     sendMessage(format, e.getSender().getName(), command.substring(s.length() - 1));
                 });
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onAdvancement(PlayerAdvancementDoneEvent e) {
+        AdvancementDisplay display = e.getAdvancement().getDisplay();
+
+        if (display != null && display.shouldAnnounceChat()) {
+            String message = null;
+
+            switch (display.getType()) {
+                case GOAL -> message = Config.btiGoal;
+                case TASK -> message = Config.btiAdvancement;
+                case CHALLENGE -> message = Config.btiChallenge;
+            }
+
+            sendMessage(message, e.getPlayer().getDisplayName(), display.getTitle());
+        }
     }
 
     private void sendMessage(String format, String... substitutions) {

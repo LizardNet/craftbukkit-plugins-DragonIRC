@@ -120,6 +120,10 @@ messages:
     say: "[Server] {message}"
     # Note: Death message format setting below only used if report_player_deaths above is true.
     death: "[{name} died: {message}.]"
+    # Advancements
+    advancement: "[{name} has made the advancement &a[{message}]&r]"
+    challenge: "[{name} has completed the challenge &5[{message}]&r]"
+    goal: "[{name} has reached the goal &a[{message}]&r]"
   # Bukkit User -> IRC User
   btu:
     # Message to appear to IRC user
