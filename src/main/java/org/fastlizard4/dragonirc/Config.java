@@ -54,6 +54,7 @@ public class Config {
     public static String btiKick;
     public static String btiSay;
     public static String btiDeath;
+    public static String btiAdvancement;
     public static String itiMessage;
     public static String itiAction;
     public static String itiJoin;
@@ -113,6 +114,7 @@ public class Config {
         btiKick = RUtils.colorize(c.getString("messages.bti.kick"));
         btiSay = RUtils.colorize(c.getString("messages.bti.say"));
         btiDeath = RUtils.colorize(c.getString("messages.bti.death"));
+        btiAdvancement = RUtils.colorize(c.getString("messages.bti.advancement"));
 
         itiMessage = c.getString("messages.iti.message");
         itiAction = c.getString("messages.iti.action");

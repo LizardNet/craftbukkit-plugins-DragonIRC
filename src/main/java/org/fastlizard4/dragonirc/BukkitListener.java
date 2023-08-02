@@ -35,16 +35,12 @@ package org.fastlizard4.dragonirc;
 
 import java.util.stream.Stream;
 
+import org.bukkit.advancement.AdvancementDisplay;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerCommandEvent;
 
 public class BukkitListener implements Listener {
@@ -127,6 +123,14 @@ public class BukkitListener implements Listener {
                 });
     }
 
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onAdvancement(PlayerAdvancementDoneEvent e) {
+        AdvancementDisplay display = e.getAdvancement().getDisplay();
+
+        if (display != null) {
+            sendMessage(Config.btiAdvancement, e.getPlayer().getDisplayName(), display.getTitle());
+        }
+    }
     private void sendMessage(String format, String... substitutions) {
         if (format == null || format.isEmpty()) {
             return;
