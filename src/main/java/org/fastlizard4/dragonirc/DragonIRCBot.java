@@ -36,6 +36,7 @@ package org.fastlizard4.dragonirc;
 import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
+import org.pircbotx.cap.SASLCapHandler;
 import org.pircbotx.delay.StaticDelay;
 import org.pircbotx.hooks.managers.ListenerManager;
 
@@ -58,6 +59,9 @@ public class DragonIRCBot {
                 .setListenerManager(lm);
         if (!password.isEmpty()) {
             cb.setServerPassword(password);
+        }
+        if (cs.getString("auth").equalsIgnoreCase("SASL PLAIN")) {
+            cb.addCapHandler(new SASLCapHandler(cs.getString("nick"), cs.getString("auth_password")));
         }
         if (cs.getString("auth").equalsIgnoreCase("NickServ")) {
             cb.setNickservPassword(cs.getString("auth_password"));

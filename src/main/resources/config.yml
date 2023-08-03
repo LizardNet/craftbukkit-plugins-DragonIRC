@@ -11,8 +11,8 @@ servers:
     port: 6667
     # Password to use to connect to the server
     server_password: ""
-    # Service to auth with - only NickServ support
-    auth: NickServ
+    # Service to auth with - only "NickServ" or "SASL PLAIN"
+    auth: SASL PLAIN
     # Password to use with auth service
     auth_password: abc123
     # Nick to use on server - if nick is taken, will add numbers to the end until it isn't
