@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfaafbf0_58a5d274",
+        "filename": "src/main/java/org/fastlizard4/dragonirc/BukkitListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-08-05T08:54:56Z",
+      "side": 1,
+      "message": "Nit: Wildcard import; your IDE probably did this automatically, so you might have to change a setting to make it not do this.",
+      "revId": "67235118c7ac785095d60517272e7e81bd21639c",
+      "serverId": "cf5d0eaf-4814-484b-b55f-41cd7f22928e",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fca47bb_76733595",
+        "filename": "src/main/java/org/fastlizard4/dragonirc/BukkitListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-08-05T08:54:56Z",
+      "side": 1,
+      "message": "I was briefly like \"wtf is this syntax\" then remembered that I updated the Java version of this repo not too long ago. 😛",
+      "revId": "67235118c7ac785095d60517272e7e81bd21639c",
+      "serverId": "cf5d0eaf-4814-484b-b55f-41cd7f22928e",
+      "unresolved": false
+    }
+  ]
+}
