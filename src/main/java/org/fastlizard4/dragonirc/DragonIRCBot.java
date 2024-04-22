@@ -36,6 +36,7 @@ package org.fastlizard4.dragonirc;
 import org.bukkit.configuration.ConfigurationSection;
 import org.pircbotx.Configuration;
 import org.pircbotx.PircBotX;
+import org.pircbotx.cap.EnableCapHandler;
 import org.pircbotx.cap.SASLCapHandler;
 import org.pircbotx.delay.StaticDelay;
 import org.pircbotx.hooks.managers.ListenerManager;
@@ -63,6 +64,16 @@ public class DragonIRCBot {
         if (cs.getString("auth").equalsIgnoreCase("SASL PLAIN")) {
             cb.addCapHandler(new SASLCapHandler(cs.getString("nick"), cs.getString("auth_password")));
         }
+
+        // blindly accept CHGHOST messages if the IRCd supports it.
+        // This will cause the bridge to ignore fakejoins for hostname changes, eg
+        //    :n!u@h1 QUIT :Changing host
+        //    :n!u@h2 JOIN #channel
+        // instead, the IRCd will send us
+        //    nn!u@h1 CHGHOST u h2
+        // which we just ignore.
+        cb.addCapHandler(new EnableCapHandler("chghost", true));
+
         if (cs.getString("auth").equalsIgnoreCase("NickServ")) {
             cb.setNickservPassword(cs.getString("auth_password"));
         }
